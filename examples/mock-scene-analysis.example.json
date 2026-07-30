@@ -1,0 +1,365 @@
+{
+  "schema_version": "4.3",
+  "request_id": "scene_mock_20260716_001",
+  "language": "zh-CN",
+  "outcome": "analysis",
+  "clarification": null,
+  "no_options": null,
+  "observations": {
+    "summary": "本地 Mock 只演示产品流程，不读取上传图片的内容。下面的方向来自固定示例，并会有限地引用你填写的文字，不能视为对当前照片的识别结果。",
+    "attention_candidates": [
+      {
+        "label": "用户填写的吸引点",
+        "evidence": "依据来自用户输入，不是图像识别。",
+        "confidence": 0
+      }
+    ],
+    "visual_relations": [
+      {
+        "elements": [
+          "用户填写的吸引点",
+          "未识别的周围环境"
+        ],
+        "relation": "separation",
+        "evidence": "Mock 没有读取图片，这只是用于演示契约的未知关系，不能作为当前照片的观察。",
+        "confidence": 0
+      },
+      {
+        "elements": [
+          "用户填写的吸引点",
+          "一个环境层次"
+        ],
+        "relation": "depth_layering",
+        "evidence": "Mock 没有读取图片，这只是用于演示前后层次字段的未知关系。",
+        "confidence": 0
+      },
+      {
+        "elements": [
+          "用户填写的吸引点",
+          "上下方向的环境线索"
+        ],
+        "relation": "directional_contrast",
+        "evidence": "Mock 没有读取图片，这只是用于演示方向线索字段的未知关系。",
+        "confidence": 0
+      },
+      {
+        "elements": [
+          "用户填写的吸引点",
+          "局部尺度或方向线索"
+        ],
+        "relation": "frame_tension",
+        "evidence": "Mock 没有读取图片，这只是用于演示画框边缘字段的未知关系。",
+        "confidence": 0
+      }
+    ],
+    "spatial_layers": [],
+    "light": {
+      "direction": "unknown",
+      "contrast": "unknown",
+      "highlight_risk": "unknown"
+    },
+    "uncertainties": [
+      "Mock 模式没有分析上传图片中的主体、空间、光线或运动。",
+      "需要配置可用的视觉模型后，才能获得针对当前图片的观察。"
+    ],
+    "factual_confidence": 0
+  },
+  "interpretations": [
+    {
+      "id": "mock_keep_context",
+      "title": "先保留整体关系",
+      "intention": "把用户提到的吸引点放回周围环境中观察，不急着减少信息。",
+      "viewing_question": "周围环境保留到什么程度时，用户填写的吸引点仍然会先被你看见？",
+      "grounding": {
+        "elements": [
+          "用户填写的吸引点",
+          "周围环境"
+        ],
+        "relationship": "Mock 无法从图片核验两者的真实位置，只演示整体与环境的关系表达。",
+        "intent_connection": "把用户填写的吸引点作为注意力起点，但不冒充图片识别。"
+      },
+      "visual_strategy": "scale_context",
+      "keep": [
+        "用户提到的吸引点",
+        "周围环境关系"
+      ],
+      "reduce": [],
+      "view_width": "wide",
+      "viewpoint": {
+        "height": "similar",
+        "lateral": "similar",
+        "distance": "similar",
+        "orientation": "keep",
+        "description": "先保持与参考图相近的机位和画幅，只改变取景范围，观察吸引点与环境是否彼此支持。",
+        "viewfinder_check": "检查视线是否仍会回到吸引点；如果周围元素持续分散注意，再尝试更窄的方向。"
+      },
+      "field_steps": [
+        {
+          "action": "先保持参考图的画幅和位置，切换到较宽视角。",
+          "check": "检查注意力是否仍会回到你填写的吸引点。"
+        },
+        {
+          "action": "再看画面边缘。",
+          "check": "确认周围环境是在支持吸引点，还是持续把视线带走。"
+        }
+      ],
+      "equivalent_focal_hint_mm": {
+        "min": 28,
+        "max": 40
+      },
+      "suggested_crop": [
+        0.05,
+        0.08,
+        0.9,
+        0.75
+      ],
+      "visual_effect": "环境信息较完整，适合先确认真正想保留的关系。",
+      "tradeoffs": "吸引点可能不会立刻变得突出。",
+      "framing_plan": "围绕已观察元素调整画框边缘与空间比例",
+      "depth_of_field_intent": "让关键元素之间的层次关系保持可辨",
+      "motion_intent": "根据现场运动决定保留或凝固变化",
+      "highlight_shadow_intent": "保留高光与阴影中的主要关系，避免无依据地追求统一亮度",
+      "uncertainty": "现场距离、光线变化与最终画幅仍需由取景器确认"
+    },
+    {
+      "id": "mock_isolate_attention",
+      "title": "让吸引点更集中",
+      "intention": "减少周围信息，用较窄视角测试吸引点是否足以独立成立。",
+      "viewing_question": "画面边缘信息减少以后，用户填写的吸引点是否仍需要周围线索才能成立？",
+      "grounding": {
+        "elements": [
+          "用户填写的吸引点",
+          "画面边缘信息"
+        ],
+        "relationship": "Mock 只演示吸引点与边缘信息之间的取舍，无法判断当前照片的具体关系。",
+        "intent_connection": "测试用户填写的吸引点是否需要环境支持。"
+      },
+      "visual_strategy": "negative_space",
+      "keep": [
+        "用户提到的吸引点"
+      ],
+      "reduce": [
+        "与吸引点关系较弱的边缘信息"
+      ],
+      "view_width": "narrow",
+      "viewpoint": {
+        "height": "similar",
+        "lateral": "similar",
+        "distance": "similar",
+        "orientation": "keep",
+        "description": "先不假定现场可以移动，在参考图位置附近保持高度与方向，用更窄的取景范围观察。",
+        "viewfinder_check": "检查吸引点周围是否仍有必要的空间；如果显得孤立，就适当放宽取景。"
+      },
+      "field_steps": [
+        {
+          "action": "保持当前位置并收紧视角。",
+          "check": "检查吸引点独立出现时是否仍有足够信息。"
+        },
+        {
+          "action": "再放宽少量取景，让画面边缘信息回来一些。",
+          "check": "观察哪一层环境一回来就让关系更完整。"
+        }
+      ],
+      "equivalent_focal_hint_mm": {
+        "min": 50,
+        "max": 70
+      },
+      "suggested_crop": [
+        0.22,
+        0.18,
+        0.56,
+        0.58
+      ],
+      "visual_effect": "注意力更集中，画面关系更简洁。",
+      "tradeoffs": "环境尺度和抵达现场的感觉会减弱。",
+      "framing_plan": "围绕已观察元素调整画框边缘与空间比例",
+      "depth_of_field_intent": "让关键元素之间的层次关系保持可辨",
+      "motion_intent": "根据现场运动决定保留或凝固变化",
+      "highlight_shadow_intent": "保留高光与阴影中的主要关系，避免无依据地追求统一亮度",
+      "uncertainty": "现场距离、光线变化与最终画幅仍需由取景器确认"
+    },
+    {
+      "id": "mock_test_layering",
+      "title": "测试前后层次",
+      "intention": "在用户允许的机位范围内，观察是否能让前后元素形成更清楚的关系。",
+      "viewing_question": "当一个环境层次遮住用户填写的吸引点更多时，前后顺序是否更容易被看见？",
+      "grounding": {
+        "elements": [
+          "用户填写的吸引点",
+          "一个环境层次"
+        ],
+        "relationship": "Mock 无法识别真实前后景，只演示吸引点与环境层次的关系。",
+        "intent_connection": "观察吸引点是否因为空间层次而更完整。"
+      },
+      "visual_strategy": "depth_occlusion",
+      "keep": [
+        "用户提到的吸引点",
+        "一个可辨认的环境层次"
+      ],
+      "reduce": [
+        "没有形成关系的零散元素"
+      ],
+      "view_width": "normal",
+      "viewpoint": {
+        "height": "unknown",
+        "lateral": "unknown",
+        "distance": "unknown",
+        "orientation": "keep",
+        "description": "Mock 无法判断现场空间与安全条件；如果你补充可移动范围，可以把它作为一项相对机位练习。",
+        "viewfinder_check": "只在安全可达的位置观察前景、中景和背景是否产生清晰连接，不需要追求固定规则。"
+      },
+      "field_steps": [
+        {
+          "action": "先保持相近机位，把前景、中景和背景各留一个元素。",
+          "check": "检查视线能否自然穿过它们。"
+        },
+        {
+          "action": "切换横竖画幅进行比较。",
+          "check": "观察哪种方向能减少无关边缘而不破坏层次。"
+        }
+      ],
+      "equivalent_focal_hint_mm": {
+        "min": 35,
+        "max": 50
+      },
+      "suggested_crop": [
+        0.1,
+        0.1,
+        0.8,
+        0.82
+      ],
+      "visual_effect": "可能增加人在现场观看的空间感。",
+      "tradeoffs": "元素会比局部方向更多，需要现场判断是否仍然清楚。",
+      "framing_plan": "围绕已观察元素调整画框边缘与空间比例",
+      "depth_of_field_intent": "让关键元素之间的层次关系保持可辨",
+      "motion_intent": "根据现场运动决定保留或凝固变化",
+      "highlight_shadow_intent": "保留高光与阴影中的主要关系，避免无依据地追求统一亮度",
+      "uncertainty": "现场距离、光线变化与最终画幅仍需由取景器确认"
+    },
+    {
+      "id": "mock_vertical_relation",
+      "title": "测试上下方向的关系",
+      "intention": "不改变现场位置，只比较竖向画幅是否更适合承接你注意到的关系。",
+      "viewing_question": "上下方向的环境线索保留更多时，用户填写的吸引点会被带向哪里？",
+      "grounding": {
+        "elements": [
+          "用户填写的吸引点",
+          "上下方向的环境线索"
+        ],
+        "relationship": "Mock 只演示上下延伸关系，无法确认当前图片是否存在该线索。",
+        "intent_connection": "比较用户吸引点在竖向关系中是否仍然成立。"
+      },
+      "visual_strategy": "rhythm_line",
+      "keep": [
+        "用户提到的吸引点",
+        "一个上下方向的环境线索"
+      ],
+      "reduce": [
+        "左右两侧关系较弱的内容"
+      ],
+      "view_width": "normal",
+      "viewpoint": {
+        "height": "similar",
+        "lateral": "similar",
+        "distance": "similar",
+        "orientation": "portrait",
+        "description": "保持参考图附近的机位，只把画幅切换为竖向，观察上下关系是否更清楚。",
+        "viewfinder_check": "检查竖向边缘减少后，吸引点是否仍与环境保持联系，而不是只剩孤立对象。"
+      },
+      "field_steps": [
+        {
+          "action": "保持当前位置并切换竖向画幅。",
+          "check": "检查上下方向是否比左右关系更能回应吸引点。"
+        },
+        {
+          "action": "逐步减少左右边缘。",
+          "check": "观察画面是否更集中，同时仍保留必要的环境提示。"
+        }
+      ],
+      "equivalent_focal_hint_mm": {
+        "min": 35,
+        "max": 55
+      },
+      "suggested_crop": [
+        0.25,
+        0.08,
+        0.5,
+        0.84
+      ],
+      "visual_effect": "画面可能获得更明确的上下延伸感，也减少横向干扰。",
+      "tradeoffs": "横向空间与环境规模会被压缩。",
+      "framing_plan": "围绕已观察元素调整画框边缘与空间比例",
+      "depth_of_field_intent": "让关键元素之间的层次关系保持可辨",
+      "motion_intent": "根据现场运动决定保留或凝固变化",
+      "highlight_shadow_intent": "保留高光与阴影中的主要关系，避免无依据地追求统一亮度",
+      "uncertainty": "现场距离、光线变化与最终画幅仍需由取景器确认"
+    },
+    {
+      "id": "mock_abstract_detail",
+      "title": "寻找一个能独立成立的局部",
+      "intention": "把注意力放到局部关系，测试它是否不依赖完整场景也能成立。",
+      "viewing_question": "局部尺度或方向线索被放大以后，用户填写的吸引点还能否说明你停下来的原因？",
+      "grounding": {
+        "elements": [
+          "用户填写的吸引点",
+          "局部尺度或方向线索"
+        ],
+        "relationship": "Mock 只演示局部与尺度线索的关系，不能确认当前图片的具体细节。",
+        "intent_connection": "测试用户填写的吸引点能否作为独立局部成立。"
+      },
+      "visual_strategy": "frame_edge",
+      "keep": [
+        "用户提到的吸引点",
+        "一个尺度或方向线索"
+      ],
+      "reduce": [
+        "与局部关系无关的周边信息"
+      ],
+      "view_width": "detail",
+      "viewpoint": {
+        "height": "similar",
+        "lateral": "similar",
+        "distance": "similar",
+        "orientation": "square",
+        "description": "保持参考图附近的位置，用较窄、接近方形的取景关系寻找局部。",
+        "viewfinder_check": "检查局部是否仍能说明尺度、方向或材质关系；如果不能，就放回更多环境。"
+      },
+      "field_steps": [
+        {
+          "action": "保持参考图附近的位置，用较窄视角寻找一个局部关系。",
+          "check": "检查它是否能独立成立。"
+        },
+        {
+          "action": "尝试方形取景并减少四周信息。",
+          "check": "观察局部是否仍有尺度或方向线索。"
+        }
+      ],
+      "equivalent_focal_hint_mm": {
+        "min": 70,
+        "max": 105
+      },
+      "suggested_crop": [
+        0.28,
+        0.22,
+        0.44,
+        0.5
+      ],
+      "visual_effect": "画面可能更克制，也更接近对形状、颜色或材质的观察。",
+      "tradeoffs": "完整环境和抵达现场的感觉会明显减少。",
+      "framing_plan": "围绕已观察元素调整画框边缘与空间比例",
+      "depth_of_field_intent": "让关键元素之间的层次关系保持可辨",
+      "motion_intent": "根据现场运动决定保留或凝固变化",
+      "highlight_shadow_intent": "保留高光与阴影中的主要关系，避免无依据地追求统一亮度",
+      "uncertainty": "现场距离、光线变化与最终画幅仍需由取景器确认"
+    }
+  ],
+  "technical_observations": {
+    "motion": "unknown",
+    "dynamic_range": "unknown",
+    "light_change": "unknown",
+    "confidence": 0,
+    "notes": [
+      "Mock 模式不从图片生成任何曝光或运动判断。"
+    ]
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/skill-registry-state.schema.json",
+  "title": "照见 Skill 注册表状态",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "cloud_skills_enabled",
+    "statuses",
+    "active_versions",
+    "rollback_versions",
+    "revision",
+    "audit_log",
+    "updated_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.1" },
+    "cloud_skills_enabled": { "type": "boolean" },
+    "statuses": {
+      "type": "object",
+      "maxProperties": 500,
+      "propertyNames": { "$ref": "#/$defs/skillKey" },
+      "additionalProperties": {
+        "enum": ["draft", "candidate", "shadow", "active", "retired"]
+      }
+    },
+    "active_versions": {
+      "type": "object",
+      "maxProperties": 100,
+      "propertyNames": { "$ref": "#/$defs/skillId" },
+      "additionalProperties": { "$ref": "#/$defs/semanticVersion" }
+    },
+    "rollback_versions": {
+      "type": "object",
+      "maxProperties": 100,
+      "propertyNames": { "$ref": "#/$defs/skillId" },
+      "additionalProperties": { "$ref": "#/$defs/semanticVersion" }
+    },
+    "revision": { "type": "integer", "minimum": 0 },
+    "audit_log": {
+      "type": "array",
+      "maxItems": 500,
+      "items": { "$ref": "#/$defs/auditEntry" }
+    },
+    "updated_at": { "$ref": "#/$defs/timestamp" }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
+    },
+    "skillId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "skillKey": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*@[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:Z|\\+00:00)$"
+    },
+    "contentHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "auditEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_id",
+        "revision",
+        "action",
+        "skill_id",
+        "skill_version",
+        "from_status",
+        "to_status",
+        "actor",
+        "reason",
+        "command",
+        "evaluation_id",
+        "evaluation_report_hash",
+        "occurred_at"
+      ],
+      "properties": {
+        "event_id": { "$ref": "#/$defs/identifier" },
+        "revision": { "type": "integer", "minimum": 1 },
+        "action": { "enum": ["shadow", "activate", "retire", "rollback", "disable", "enable"] },
+        "skill_id": {
+          "anyOf": [
+            { "$ref": "#/$defs/skillId" },
+            { "type": "null" }
+          ]
+        },
+        "skill_version": {
+          "anyOf": [
+            { "$ref": "#/$defs/semanticVersion" },
+            { "type": "null" }
+          ]
+        },
+        "from_status": {
+          "type": ["string", "null"],
+          "enum": [null, "draft", "candidate", "shadow", "active", "retired"]
+        },
+        "to_status": {
+          "type": ["string", "null"],
+          "enum": [null, "draft", "candidate", "shadow", "active", "retired"]
+        },
+        "actor": { "$ref": "#/$defs/identifier" },
+        "reason": { "type": "string", "minLength": 8, "maxLength": 300 },
+        "command": { "type": "string", "minLength": 3, "maxLength": 300 },
+        "evaluation_id": {
+          "anyOf": [
+            { "$ref": "#/$defs/identifier" },
+            { "type": "null" }
+          ]
+        },
+        "evaluation_report_hash": {
+          "anyOf": [
+            { "$ref": "#/$defs/contentHash" },
+            { "type": "null" }
+          ]
+        },
+        "occurred_at": { "$ref": "#/$defs/timestamp" }
+      }
+    }
+  }
+}

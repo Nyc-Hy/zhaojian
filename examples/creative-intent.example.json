@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "creative_intent_id": "creative_intent_001",
+  "subject_relations": [
+    "近处树枝与远处山脊形成前后遮挡",
+    "湖面亮区连接左侧树影与远处山体"
+  ],
+  "attention_path": [
+    "先看到湖面亮区",
+    "沿亮区移向远处山脊",
+    "最后回到近处树枝"
+  ],
+  "keep": [
+    "树枝与山脊之间的层次",
+    "湖面亮区的连续方向"
+  ],
+  "reduce": [
+    "画面右下角分散注意的碎石"
+  ],
+  "framing_intent": "保留树枝作为近景边缘，让山脊和湖面之间仍有呼吸空间。",
+  "tonal_intent": "保留湖面亮区与山体暗部的对照，但不牺牲亮区纹理。",
+  "color_intent": "维持冷色环境，只保留日落残光的轻微暖色差异。",
+  "motion_intent": null,
+  "depth_intent": "通过近处树枝、中部湖面和远处山脊维持三层空间。",
+  "texture_intent": "保留湖面细微纹理，不把水面处理成完全平滑色块。",
+  "uncertainties": [
+    "树枝是否会在最终照片中显得过重，需要结合成片再判断。"
+  ],
+  "tradeoffs": [
+    "强化湖面亮区可能减弱右侧岸线细节。",
+    "保留近景树枝会减少山体的完整轮廓。"
+  ],
+  "source_analysis_id": "analysis_001",
+  "selected_interpretation_id": "direction_depth_001",
+  "skill_versions": [
+    {
+      "skill_id": "observe-scene",
+      "skill_version": "1.0.0",
+      "content_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "skill_id": "composition-relations",
+      "skill_version": "1.0.0",
+      "content_hash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  ],
+  "gear_snapshot": {
+    "id": "gear_default_001",
+    "name": "随身摄影包",
+    "camera": "全画幅相机",
+    "lens": "24-70mm",
+    "sensor_width": 36,
+    "sensor_height": 24,
+    "crop_factor": 1,
+    "focal_min": 24,
+    "focal_max": 70,
+    "maximum_aperture": 2.8,
+    "minimum_aperture": 22,
+    "min_iso": 100,
+    "max_iso": 51200
+  },
+  "created_at": "2026-07-24T08:05:00Z"
+}

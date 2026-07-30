@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/gear-profile.schema.json",
+  "title": "照见器材档案",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "name", "camera", "lenses", "accessories", "preferences"],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "id": { "type": "string", "minLength": 3, "maxLength": 128 },
+    "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "camera": { "$ref": "#/$defs/camera" },
+    "lenses": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": { "$ref": "#/$defs/lens" }
+    },
+    "accessories": { "$ref": "#/$defs/accessories" },
+    "preferences": { "$ref": "#/$defs/preferences" }
+  },
+  "$defs": {
+    "camera": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manufacturer", "model", "sensor", "iso", "shutter"],
+      "properties": {
+        "manufacturer": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "model": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "sensor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["width_mm", "height_mm", "crop_factor"],
+          "properties": {
+            "width_mm": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 },
+            "height_mm": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 },
+            "crop_factor": { "type": "number", "minimum": 0.5, "maximum": 10 }
+          }
+        },
+        "iso": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["min", "max"],
+          "properties": {
+            "base": { "type": "integer", "minimum": 25, "maximum": 12800 },
+            "min": { "type": "integer", "minimum": 25, "maximum": 12800 },
+            "max": { "type": "integer", "minimum": 100, "maximum": 10000000 }
+          }
+        },
+        "shutter": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["shortest_seconds", "longest_seconds"],
+          "properties": {
+            "shortest_seconds": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+            "longest_seconds": { "type": "number", "minimum": 1, "maximum": 86400 }
+          }
+        },
+        "ibis_stops": { "type": "number", "minimum": 0, "maximum": 10 }
+      }
+    },
+    "lens": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "manufacturer",
+        "model",
+        "type",
+        "focal_length_mm",
+        "maximum_aperture",
+        "minimum_aperture"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 3, "maxLength": 128 },
+        "manufacturer": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "model": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "type": { "type": "string", "enum": ["prime", "zoom"] },
+        "focal_length_mm": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["min", "max"],
+          "properties": {
+            "min": { "type": "number", "minimum": 4, "maximum": 2000 },
+            "max": { "type": "number", "minimum": 4, "maximum": 2000 }
+          }
+        },
+        "maximum_aperture": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["wide", "tele"],
+          "properties": {
+            "wide": { "type": "number", "minimum": 0.7, "maximum": 64 },
+            "tele": { "type": "number", "minimum": 0.7, "maximum": 64 }
+          }
+        },
+        "minimum_aperture": { "type": "number", "minimum": 4, "maximum": 128 },
+        "stabilization_stops": { "type": "number", "minimum": 0, "maximum": 10 },
+        "minimum_focus_distance_m": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 }
+      }
+    },
+    "accessories": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tripod", "monopod", "cpl", "remote_release", "nd_stops"],
+      "properties": {
+        "tripod": { "type": "boolean" },
+        "monopod": { "type": "boolean" },
+        "cpl": { "type": "boolean" },
+        "remote_release": { "type": "boolean" },
+        "nd_stops": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "number", "minimum": 1, "maximum": 20 }
+        }
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_auto_iso", "capture_format", "handheld_stability", "default_priority"],
+      "properties": {
+        "max_auto_iso": { "type": "integer", "minimum": 100, "maximum": 10000000 },
+        "capture_format": { "type": "string", "enum": ["raw", "jpeg", "raw+jpeg"] },
+        "handheld_stability": { "type": "string", "enum": ["conservative", "normal", "calibrated"] },
+        "default_priority": { "type": "string", "enum": ["convenience", "image_quality", "motion_expression"] },
+        "notes": { "type": "string", "maxLength": 400 }
+      }
+    }
+  }
+}

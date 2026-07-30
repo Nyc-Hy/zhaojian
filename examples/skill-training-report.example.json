@@ -1,0 +1,275 @@
+{
+  "schema_version": "1.5",
+  "report_id": "report_contract_fixture_001",
+  "run_id": "run_contract_fixture_001",
+  "status": "completed",
+  "dataset": {
+    "id": "photography-skill-contract-fixture",
+    "version": "1.0.0",
+    "content_hash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "selection": {
+    "strategy": "explicit_asset_ids",
+    "source_asset_count": 60,
+    "selected_asset_count": 3,
+    "asset_ids": [
+      "landscape_training_001",
+      "portrait_regression_001",
+      "difficult_holdout_001"
+    ],
+    "split_counts": {
+      "training": 1,
+      "regression": 1,
+      "holdout": 1
+    },
+    "content_hash": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+  },
+  "skills": [
+    {
+      "id": "observe-scene",
+      "version": "1.0.0",
+      "content_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "composition-relations",
+      "version": "1.0.0",
+      "content_hash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  ],
+  "run_configuration": {
+    "mode": "mock",
+    "provider": "mock",
+    "model": "trainer-fixture-v1",
+    "prompt_version": "1.0.0",
+    "schema_version": "1.0.0",
+    "independence_level": "mock_fixture",
+    "max_attempts": 2,
+    "timeout_ms": 2000,
+    "concurrency": 1,
+    "max_provider_calls": 0,
+    "selection_hash": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+    "mock_scenario_version": "1.0.0",
+    "config_hash": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  },
+  "role_runs": [
+    {
+      "role": "observer",
+      "provider": "mock",
+      "model": "trainer-fixture-v1",
+      "prompt_version": "1.0.0",
+      "schema_version": "1.0.0",
+      "independence_level": "mock_fixture",
+      "attempts": 3,
+      "provider_calls": 0,
+      "successful_calls": 0,
+      "failed_calls": 0,
+      "uncertain_calls": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "estimated_cost": 0,
+      "total_latency_ms": 0,
+      "average_latency_ms": 0,
+      "max_latency_ms": 0,
+      "status": "completed"
+    },
+    {
+      "role": "direction_generator",
+      "provider": "mock",
+      "model": "trainer-fixture-v1",
+      "prompt_version": "1.0.0",
+      "schema_version": "1.0.0",
+      "independence_level": "mock_fixture",
+      "attempts": 4,
+      "provider_calls": 0,
+      "successful_calls": 0,
+      "failed_calls": 0,
+      "uncertain_calls": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "estimated_cost": 0,
+      "total_latency_ms": 0,
+      "average_latency_ms": 0,
+      "max_latency_ms": 0,
+      "status": "completed"
+    },
+    {
+      "role": "critic",
+      "provider": "mock",
+      "model": "trainer-fixture-v1",
+      "prompt_version": "1.0.0",
+      "schema_version": "1.0.0",
+      "independence_level": "mock_fixture",
+      "attempts": 3,
+      "provider_calls": 0,
+      "successful_calls": 0,
+      "failed_calls": 0,
+      "uncertain_calls": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "estimated_cost": 0,
+      "total_latency_ms": 0,
+      "average_latency_ms": 0,
+      "max_latency_ms": 0,
+      "status": "completed"
+    },
+    {
+      "role": "red_team",
+      "provider": "mock",
+      "model": "trainer-fixture-v1",
+      "prompt_version": "1.0.0",
+      "schema_version": "1.0.0",
+      "independence_level": "mock_fixture",
+      "attempts": 3,
+      "provider_calls": 0,
+      "successful_calls": 0,
+      "failed_calls": 0,
+      "uncertain_calls": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "estimated_cost": 0,
+      "total_latency_ms": 0,
+      "average_latency_ms": 0,
+      "max_latency_ms": 0,
+      "status": "completed"
+    },
+    {
+      "role": "curator",
+      "provider": "mock",
+      "model": "trainer-fixture-v1",
+      "prompt_version": "1.0.0",
+      "schema_version": "1.0.0",
+      "independence_level": "mock_fixture",
+      "attempts": 3,
+      "provider_calls": 0,
+      "successful_calls": 0,
+      "failed_calls": 0,
+      "uncertain_calls": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "estimated_cost": 0,
+      "total_latency_ms": 0,
+      "average_latency_ms": 0,
+      "max_latency_ms": 0,
+      "status": "completed"
+    }
+  ],
+  "counts": {
+    "total": 3,
+    "completed": 2,
+    "quarantined": 1,
+    "failed": 0,
+    "cancelled": 0
+  },
+  "metrics": [
+    {
+      "dimension": "json_parse_rate",
+      "measured_value": 1,
+      "threshold": 0.95,
+      "unit": "ratio",
+      "passed": true
+    },
+    {
+      "dimension": "serious_hallucination_rate",
+      "measured_value": 0,
+      "threshold": 0,
+      "unit": "ratio",
+      "passed": true
+    },
+    {
+      "dimension": "intent_response_rate",
+      "measured_value": 1,
+      "threshold": 0.9,
+      "unit": "ratio",
+      "passed": true
+    },
+    {
+      "dimension": "direction_difference_rate",
+      "measured_value": 1,
+      "threshold": 0.8,
+      "unit": "ratio",
+      "passed": true
+    },
+    {
+      "dimension": "grounding_rate",
+      "measured_value": 1,
+      "threshold": 0.9,
+      "unit": "ratio",
+      "passed": true
+    },
+    {
+      "dimension": "clarification_effectiveness_rate",
+      "measured_value": 1,
+      "threshold": 0.8,
+      "unit": "ratio",
+      "passed": true
+    },
+    {
+      "dimension": "field_executability_rate",
+      "measured_value": 1,
+      "threshold": 0.85,
+      "unit": "ratio",
+      "passed": true
+    },
+    {
+      "dimension": "gear_feasibility_rate",
+      "measured_value": 1,
+      "threshold": 0.95,
+      "unit": "ratio",
+      "passed": true
+    },
+    {
+      "dimension": "judge_language_rate",
+      "measured_value": 0,
+      "threshold": 0,
+      "unit": "ratio",
+      "passed": true
+    }
+  ],
+  "failures": [
+    {
+      "asset_id": "difficult_holdout_001",
+      "dimension": "model_disagreement",
+      "evidence": "Mock 角色分歧场景进入隔离区，不作为人工真值。",
+      "failure_code": "model_disagreement",
+      "failure_reason": "Mock 角色分歧场景进入隔离区，不作为人工真值。",
+      "retryable": null,
+      "role": "critic",
+      "validation_status": "quarantined"
+    }
+  ],
+  "telemetry": {
+    "provider_calls": 0,
+    "successful_calls": 0,
+    "failed_calls": 0,
+    "uncertain_calls": 0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "estimated_cost": 0,
+    "total_latency_ms": 0,
+    "average_latency_ms": 0,
+    "max_latency_ms": 0
+  },
+  "budget": {
+    "currency": "CNY",
+    "limit": 0,
+    "estimated_spend": 0,
+    "provider_calls": 0,
+    "uncertain_calls": 0,
+    "pricing_version": "mock-unpriced",
+    "pricing_effective_at": "1970-01-01T00:00:00Z",
+    "input_per_million_cny": 0,
+    "output_per_million_cny": 0,
+    "max_cost_per_call": 0,
+    "stopped_new_work": false,
+    "stop_reason": null
+  },
+  "checkpoint": {
+    "run_content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "artifact_count": 3,
+    "comparable_run_key": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+  },
+  "validation_status": "passed",
+  "started_at": "2026-07-25T08:00:00Z",
+  "completed_at": "2026-07-25T08:00:01Z",
+  "content_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+}

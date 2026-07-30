@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Version>1.0.0-beta.1</Version>
+    <InformationalVersion>1.0.0-beta.1</InformationalVersion>
+    <Authors>Nyc-Hy and Zhaojian contributors</Authors>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <Description>以人为主体的摄影观看与技术随行助手。</Description>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <NoDefaultLaunchSettingsFile>True</NoDefaultLaunchSettingsFile>
+    <UserSecretsId>zhaojian-api-development</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="../../skill-modules/**/*" Link="SkillModules/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../examples/creative-intent.example.json" Link="Data/creative-intent.example.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../examples/final-photo-observation.example.json" Link="Data/final-photo-observation.example.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../examples/mock-scene-analysis.example.json" Link="Data/mock-scene-analysis.example.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../examples/post-process-plan.example.json" Link="Data/post-process-plan.example.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../examples/skill-definition.example.json" Link="Data/skill-definition.example.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../examples/skill-evaluation-report.example.json" Link="Data/skill-evaluation-report.example.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../examples/skill-registry-state.example.json" Link="Data/skill-registry-state.example.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../examples/skill-training-dataset.example.json" Link="Data/skill-training-dataset.example.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../examples/skill-training-splits.example.json" Link="Data/skill-training-splits.example.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../examples/skill-training-artifact.example.json" Link="Data/skill-training-artifact.example.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../examples/skill-training-run.example.json" Link="Data/skill-training-run.example.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../examples/skill-training-report.example.json" Link="Data/skill-training-report.example.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../examples/skill-training-role-output.example.json" Link="Data/skill-training-role-output.example.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../schemas/creative-intent.schema.json" Link="Data/creative-intent.schema.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../schemas/final-photo-observation.schema.json" Link="Data/final-photo-observation.schema.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../schemas/post-process-plan.schema.json" Link="Data/post-process-plan.schema.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../schemas/scene-understanding.schema.json" Link="Data/scene-understanding.schema.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../schemas/scene-analysis.schema.json" Link="Data/scene-analysis.schema.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../schemas/skill-definition.schema.json" Link="Data/skill-definition.schema.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../schemas/skill-evaluation-report.schema.json" Link="Data/skill-evaluation-report.schema.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../schemas/skill-registry-state.schema.json" Link="Data/skill-registry-state.schema.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../schemas/skill-training-dataset.schema.json" Link="Data/skill-training-dataset.schema.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../schemas/skill-training-splits.schema.json" Link="Data/skill-training-splits.schema.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../schemas/skill-training-artifact.schema.json" Link="Data/skill-training-artifact.schema.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../schemas/skill-training-run.schema.json" Link="Data/skill-training-run.schema.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../schemas/skill-training-report.schema.json" Link="Data/skill-training-report.schema.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../schemas/skill-training-role-output.schema.json" Link="Data/skill-training-role-output.schema.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.8" />
+    <PackageReference Include="SkiaSharp" Version="4.150.1" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="4.150.1" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Zhaojian.Api.Tests" />
+  </ItemGroup>
+
+</Project>

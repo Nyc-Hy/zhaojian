@@ -1,0 +1,395 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/scene-analysis.schema.json",
+  "title": "照见场景分析",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "language",
+    "outcome",
+    "clarification",
+    "no_options",
+    "observations",
+    "interpretations",
+    "technical_observations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "4.3"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128
+    },
+    "language": {
+      "type": "string",
+      "enum": ["zh-CN"]
+    },
+    "outcome": {
+      "type": "string",
+      "enum": ["analysis", "clarification", "no_options"]
+    },
+    "clarification": {
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/clarification" }
+      ]
+    },
+    "no_options": {
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/noOptions" }
+      ]
+    },
+    "observations": {
+      "$ref": "#/$defs/observations"
+    },
+    "interpretations": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/interpretation"
+      }
+    },
+    "technical_observations": {
+      "$ref": "#/$defs/technicalObservations"
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "outcome": { "const": "analysis" } }, "required": ["outcome"] },
+      "then": {
+        "properties": {
+          "clarification": { "type": "null" },
+          "no_options": { "type": "null" },
+          "interpretations": { "type": "array", "minItems": 2, "maxItems": 5 }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "outcome": { "const": "clarification" } }, "required": ["outcome"] },
+      "then": {
+        "properties": {
+          "clarification": { "$ref": "#/$defs/clarification" },
+          "no_options": { "type": "null" },
+          "interpretations": { "type": "array", "maxItems": 0 }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "outcome": { "const": "no_options" } }, "required": ["outcome"] },
+      "then": {
+        "properties": {
+          "clarification": { "type": "null" },
+          "no_options": { "$ref": "#/$defs/noOptions" },
+          "interpretations": { "type": "array", "maxItems": 0 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "bbox": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        { "type": "number", "minimum": 0, "maximum": 1 },
+        { "type": "number", "minimum": 0, "maximum": 1 },
+        { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+        { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+      ],
+      "items": false
+    },
+    "attentionCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "evidence", "confidence"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "evidence": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "region": { "$ref": "#/$defs/bbox" }
+      }
+    },
+    "visualRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["elements", "relation", "evidence", "confidence"],
+      "properties": {
+        "elements": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+        },
+        "relation": {
+          "type": "string",
+          "enum": ["overlap", "separation", "continuation", "repetition", "directional_contrast", "scale_contrast", "tonal_contrast", "color_contrast", "frame_tension", "depth_layering"]
+        },
+        "evidence": { "type": "string", "minLength": 4, "maxLength": 220 },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "observations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "attention_candidates",
+        "visual_relations",
+        "spatial_layers",
+        "light",
+        "uncertainties",
+        "factual_confidence"
+      ],
+      "properties": {
+        "summary": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "attention_candidates": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": { "$ref": "#/$defs/attentionCandidate" }
+        },
+        "visual_relations": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": { "$ref": "#/$defs/visualRelation" }
+        },
+        "spatial_layers": {
+          "type": "array",
+          "maxItems": 6,
+          "items": { "type": "string", "minLength": 1, "maxLength": 100 }
+        },
+        "light": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["direction", "contrast", "highlight_risk"],
+          "properties": {
+            "direction": {
+              "type": "string",
+              "enum": ["front", "side", "back", "top", "diffuse", "mixed", "unknown"]
+            },
+            "contrast": {
+              "type": "string",
+              "enum": ["low", "medium", "high", "unknown"]
+            },
+            "highlight_risk": {
+              "type": "string",
+              "enum": ["low", "medium", "high", "unknown"]
+            }
+          }
+        },
+        "uncertainties": {
+          "type": "array",
+          "maxItems": 8,
+          "items": { "type": "string", "minLength": 1, "maxLength": 180 }
+        },
+        "factual_confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "clarification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["question", "reason", "options"],
+      "properties": {
+        "question": { "type": "string", "minLength": 4, "maxLength": 160 },
+        "reason": { "type": "string", "minLength": 2, "maxLength": 200 },
+        "options": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 60 }
+        }
+      }
+    },
+    "noOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason", "evidence"],
+      "properties": {
+        "reason": { "type": "string", "minLength": 4, "maxLength": 240 },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 2, "maxLength": 180 }
+        },
+        "next_step": { "type": "string", "minLength": 2, "maxLength": 180 }
+      }
+    },
+    "grounding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["elements", "relationship", "intent_connection"],
+      "properties": {
+        "elements": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+        },
+        "relationship": { "type": "string", "minLength": 4, "maxLength": 180 },
+        "intent_connection": { "type": "string", "minLength": 4, "maxLength": 180 }
+      }
+    },
+    "interpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "intention",
+        "viewing_question",
+        "grounding",
+        "visual_strategy",
+        "keep",
+        "reduce",
+        "view_width",
+        "viewpoint",
+        "field_steps",
+        "framing_plan",
+        "depth_of_field_intent",
+        "motion_intent",
+        "highlight_shadow_intent",
+        "uncertainty",
+        "visual_effect",
+        "tradeoffs"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_-]{3,40}$" },
+        "title": { "type": "string", "minLength": 2, "maxLength": 40 },
+        "intention": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "viewing_question": { "type": "string", "minLength": 6, "maxLength": 180 },
+        "grounding": { "$ref": "#/$defs/grounding" },
+        "visual_strategy": {
+          "type": "string",
+          "enum": ["depth_occlusion", "scale_context", "rhythm_line", "light_color", "negative_space", "frame_edge"]
+        },
+        "keep": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+        },
+        "reduce": {
+          "type": "array",
+          "maxItems": 6,
+          "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+        },
+        "view_width": {
+          "type": "string",
+          "enum": ["very_wide", "wide", "normal", "narrow", "detail"]
+        },
+        "viewpoint": {
+          "$ref": "#/$defs/viewpoint"
+        },
+        "field_steps": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["action", "check"],
+            "properties": {
+              "action": { "type": "string", "minLength": 4, "maxLength": 100 },
+              "check": { "type": "string", "minLength": 4, "maxLength": 120 }
+            }
+          }
+        },
+        "framing_plan": { "type": "string", "minLength": 4, "maxLength": 180 },
+        "depth_of_field_intent": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "motion_intent": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "highlight_shadow_intent": { "type": "string", "minLength": 2, "maxLength": 180 },
+        "uncertainty": { "type": "string", "minLength": 2, "maxLength": 180 },
+        "equivalent_focal_hint_mm": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["min", "max"],
+          "properties": {
+            "min": { "type": "number", "minimum": 8, "maximum": 800 },
+            "max": { "type": "number", "minimum": 8, "maximum": 800 }
+          }
+        },
+        "suggested_crop": { "$ref": "#/$defs/bbox" },
+        "visual_effect": { "type": "string", "minLength": 2, "maxLength": 240 },
+        "tradeoffs": { "type": "string", "minLength": 2, "maxLength": 240 }
+      }
+    },
+    "viewpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "height",
+        "lateral",
+        "distance",
+        "orientation",
+        "description",
+        "viewfinder_check"
+      ],
+      "properties": {
+        "height": {
+          "type": "string",
+          "enum": ["lower", "similar", "higher", "unknown"]
+        },
+        "lateral": {
+          "type": "string",
+          "enum": ["left", "similar", "right", "unknown"]
+        },
+        "distance": {
+          "type": "string",
+          "enum": ["closer", "similar", "farther", "unknown"]
+        },
+        "orientation": {
+          "type": "string",
+          "enum": ["landscape", "portrait", "square", "keep", "unknown"]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 180
+        },
+        "viewfinder_check": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 180
+        }
+      }
+    },
+    "technicalObservations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["motion", "dynamic_range", "light_change", "confidence"],
+      "properties": {
+        "motion": {
+          "type": "string",
+          "enum": ["static", "subtle", "significant", "unknown"]
+        },
+        "dynamic_range": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "unknown"]
+        },
+        "light_change": {
+          "type": "string",
+          "enum": ["stable", "changing", "unknown"]
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "notes": {
+          "type": "array",
+          "maxItems": 6,
+          "items": { "type": "string", "minLength": 1, "maxLength": 180 }
+        }
+      }
+    }
+  }
+}

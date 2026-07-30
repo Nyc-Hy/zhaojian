@@ -1,0 +1,51 @@
+{
+  "schema_version": "4.3",
+  "request_id": "scene_20260721_no_options",
+  "language": "zh-CN",
+  "outcome": "no_options",
+  "clarification": null,
+  "no_options": {
+    "reason": "当前画面中只有一个能够被具体说明的观看关系，无法形成至少两种彼此不同且有充分依据的方向。",
+    "evidence": [
+      "已确认的关注元素只有远处亮点，周围元素关系仍无法从图片中可靠辨认。",
+      "继续改变标题、焦段或形容词不会产生新的画面关系。"
+    ],
+    "next_step": "可以补充亮点周围有哪些可确认元素，或换一张能看清空间关系的参考图。"
+  },
+  "observations": {
+    "summary": "画面中可以确认一个远处亮点，但周围区域细节不足，无法可靠判断它与环境的空间、明暗或遮挡关系。",
+    "attention_candidates": [
+      {
+        "label": "远处亮点",
+        "evidence": "亮点可见，但边缘与周围内容模糊。",
+        "confidence": 0.62
+      }
+    ],
+    "visual_relations": [
+      {
+        "elements": ["远处亮点", "模糊背景"],
+        "relation": "tonal_contrast",
+        "evidence": "只能确认亮点比背景更亮，无法辨认其他具体关系。",
+        "confidence": 0.42
+      }
+    ],
+    "spatial_layers": [],
+    "light": {
+      "direction": "unknown",
+      "contrast": "unknown",
+      "highlight_risk": "unknown"
+    },
+    "uncertainties": [
+      "无法确认模糊背景中是否存在可以用于第二种观看方向的具体元素。"
+    ],
+    "factual_confidence": 0.45
+  },
+  "interpretations": [],
+  "technical_observations": {
+    "motion": "unknown",
+    "dynamic_range": "unknown",
+    "light_change": "unknown",
+    "confidence": 0.3,
+    "notes": ["参考图信息不足，不据此生成具体曝光参数。"]
+  }
+}

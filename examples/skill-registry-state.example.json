@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.1",
+  "cloud_skills_enabled": true,
+  "statuses": {
+    "observe-scene@1.0.0": "active",
+    "observe-scene@1.1.0": "shadow",
+    "composition-relations@1.0.0": "active"
+  },
+  "active_versions": {
+    "observe-scene": "1.0.0",
+    "composition-relations": "1.0.0"
+  },
+  "rollback_versions": {
+    "observe-scene": "1.1.0"
+  },
+  "revision": 1,
+  "audit_log": [
+    {
+      "event_id": "skill_event_fixture_001",
+      "revision": 1,
+      "action": "shadow",
+      "skill_id": "observe-scene",
+      "skill_version": "1.1.0",
+      "from_status": "candidate",
+      "to_status": "shadow",
+      "actor": "release_fixture",
+      "reason": "候选通过固定回归和保留集评测，进入 shadow。",
+      "command": "npm run skill:shadow",
+      "evaluation_id": "evaluation_fixture_candidate_001",
+      "evaluation_report_hash": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+      "occurred_at": "2026-07-27T12:05:00Z"
+    }
+  ],
+  "updated_at": "2026-07-27T12:05:00Z"
+}

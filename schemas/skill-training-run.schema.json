@@ -1,0 +1,559 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/skill-training-run.schema.json",
+  "title": "照见 Skill 训练运行检查点",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "mode",
+    "status",
+    "dataset",
+    "skills",
+    "configuration",
+    "budget",
+    "counts",
+    "items",
+    "started_at",
+    "updated_at",
+    "completed_at",
+    "stop_reason",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": { "enum": ["1.0", "1.1"] },
+    "run_id": { "$ref": "#/$defs/identifier" },
+    "mode": { "enum": ["mock", "live"] },
+    "status": { "$ref": "#/$defs/executionState" },
+    "dataset": { "$ref": "#/$defs/versionedReference" },
+    "selection": { "$ref": "#/$defs/selection" },
+    "skills": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/versionedReference" }
+    },
+    "configuration": { "$ref": "#/$defs/configuration" },
+    "budget": { "$ref": "#/$defs/budget" },
+    "call_records": {
+      "type": "array",
+      "maxItems": 2500,
+      "items": { "$ref": "#/$defs/callRecord" }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "terminal", "completed", "quarantined", "failed", "cancelled"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 1, "maximum": 500 },
+        "terminal": { "type": "integer", "minimum": 0, "maximum": 500 },
+        "completed": { "type": "integer", "minimum": 0, "maximum": 500 },
+        "quarantined": { "type": "integer", "minimum": 0, "maximum": 500 },
+        "failed": { "type": "integer", "minimum": 0, "maximum": 500 },
+        "cancelled": { "type": "integer", "minimum": 0, "maximum": 500 }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 500,
+      "items": { "$ref": "#/$defs/item" }
+    },
+    "started_at": { "$ref": "#/$defs/timestamp" },
+    "updated_at": { "$ref": "#/$defs/timestamp" },
+    "completed_at": {
+      "anyOf": [
+        { "$ref": "#/$defs/timestamp" },
+        { "type": "null" }
+      ]
+    },
+    "stop_reason": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "completed",
+        "rejected",
+        "cancelled",
+        "budget_exhausted",
+        "provider_call_limit_reached",
+        "item_failure",
+        "fatal_error"
+      ]
+    },
+    "content_hash": { "$ref": "#/$defs/contentHash" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "schema_version": { "const": "1.1" } },
+        "required": ["schema_version"]
+      },
+      "then": {
+        "required": ["selection", "call_records"],
+        "properties": {
+          "selection": { "$ref": "#/$defs/selection" },
+          "call_records": {
+            "type": "array",
+            "maxItems": 2500,
+            "items": { "$ref": "#/$defs/callRecord" }
+          },
+          "configuration": {
+            "type": "object",
+            "required": ["max_provider_calls", "selection_hash"],
+            "properties": {
+              "max_provider_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+              "selection_hash": { "$ref": "#/$defs/contentHash" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "mode": { "const": "mock" } } },
+      "then": {
+        "properties": {
+          "configuration": {
+            "type": "object",
+            "properties": {
+              "provider": { "const": "mock" },
+              "independence_level": { "const": "mock_fixture" },
+              "budget_limit": { "const": 0 },
+              "input_per_million_cny": { "const": 0 },
+              "output_per_million_cny": { "const": 0 },
+              "max_cost_per_call": { "const": 0 },
+              "max_provider_calls": { "const": 0 },
+              "base_url": { "type": "null" }
+            }
+          },
+          "call_records": { "type": "array", "maxItems": 0 },
+          "budget": {
+            "type": "object",
+            "properties": {
+              "limit": { "const": 0 },
+              "reserved": { "const": 0 },
+              "reserved_calls": { "const": 0 },
+              "estimated_spend": { "const": 0 },
+              "provider_calls": { "const": 0 },
+              "uncertain_calls": { "const": 0 }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "mode": { "const": "live" } } },
+      "then": {
+        "properties": {
+          "configuration": {
+            "type": "object",
+            "properties": {
+              "budget_limit": { "type": "number", "exclusiveMinimum": 0 },
+              "max_provider_calls": { "type": "integer", "minimum": 1 },
+              "independence_level": {
+                "enum": ["same_model_different_roles", "cross_model"]
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
+    },
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$",
+      "maxLength": 64
+    },
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    },
+    "contentHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "versionedReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "content_hash"],
+      "properties": {
+        "id": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "version": { "$ref": "#/$defs/semanticVersion" },
+        "content_hash": { "$ref": "#/$defs/contentHash" }
+      }
+    },
+    "splitCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["training", "regression", "holdout"],
+      "properties": {
+        "training": { "type": "integer", "minimum": 0, "maximum": 60 },
+        "regression": { "type": "integer", "minimum": 0, "maximum": 60 },
+        "holdout": { "type": "integer", "minimum": 0, "maximum": 60 }
+      }
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strategy",
+        "source_asset_count",
+        "selected_asset_count",
+        "asset_ids",
+        "split_counts",
+        "content_hash"
+      ],
+      "properties": {
+        "strategy": { "enum": ["all", "explicit_asset_ids"] },
+        "source_asset_count": { "type": "integer", "minimum": 1, "maximum": 60 },
+        "selected_asset_count": { "type": "integer", "minimum": 1, "maximum": 60 },
+        "asset_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 60,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{2,79}$"
+          }
+        },
+        "split_counts": { "$ref": "#/$defs/splitCounts" },
+        "content_hash": { "$ref": "#/$defs/contentHash" }
+      }
+    },
+    "role": {
+      "type": "string",
+      "enum": ["observer", "direction_generator", "critic", "red_team", "curator"]
+    },
+    "executionState": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "observing",
+        "generating",
+        "criticizing",
+        "red_teaming",
+        "curating",
+        "evaluating",
+        "completed",
+        "quarantined",
+        "rejected",
+        "cancelled",
+        "failed"
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "model",
+        "prompt_version",
+        "schema_version",
+        "independence_level",
+        "max_attempts",
+        "timeout_ms",
+        "concurrency",
+        "budget_limit",
+        "currency",
+        "pricing_version",
+        "pricing_effective_at",
+        "input_per_million_cny",
+        "output_per_million_cny",
+        "max_cost_per_call",
+        "base_url",
+        "mock_scenario_version",
+        "config_hash"
+      ],
+      "properties": {
+        "provider": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "model": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "prompt_version": { "$ref": "#/$defs/semanticVersion" },
+        "schema_version": { "$ref": "#/$defs/semanticVersion" },
+        "independence_level": {
+          "type": "string",
+          "enum": ["mock_fixture", "same_model_different_roles", "cross_model"]
+        },
+        "max_attempts": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "timeout_ms": { "type": "integer", "minimum": 100, "maximum": 600000 },
+        "concurrency": { "type": "integer", "minimum": 1, "maximum": 8 },
+        "fail_fast": { "type": "boolean" },
+        "max_provider_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+        "selection_hash": { "$ref": "#/$defs/contentHash" },
+        "budget_limit": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "currency": { "const": "CNY" },
+        "pricing_version": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "pricing_effective_at": { "$ref": "#/$defs/timestamp" },
+        "input_per_million_cny": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "output_per_million_cny": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "max_cost_per_call": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "base_url": {
+          "anyOf": [
+            { "type": "string", "pattern": "^https://", "maxLength": 300 },
+            { "type": "null" }
+          ]
+        },
+        "mock_scenario_version": { "$ref": "#/$defs/semanticVersion" },
+        "config_hash": { "$ref": "#/$defs/contentHash" }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "currency",
+        "limit",
+        "reserved",
+        "reserved_calls",
+        "estimated_spend",
+        "provider_calls",
+        "uncertain_calls",
+        "pricing_version",
+        "pricing_effective_at",
+        "input_per_million_cny",
+        "output_per_million_cny",
+        "max_cost_per_call"
+      ],
+      "properties": {
+        "currency": { "const": "CNY" },
+        "limit": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "reserved": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "reserved_calls": { "type": "integer", "minimum": 0 },
+        "estimated_spend": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "provider_calls": { "type": "integer", "minimum": 0 },
+        "uncertain_calls": { "type": "integer", "minimum": 0 },
+        "pricing_version": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "pricing_effective_at": { "$ref": "#/$defs/timestamp" },
+        "input_per_million_cny": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "output_per_million_cny": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "max_cost_per_call": { "type": "number", "minimum": 0, "maximum": 1000000 }
+      }
+    },
+    "attempts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observer", "direction_generator", "critic", "red_team", "curator"],
+      "properties": {
+        "observer": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "direction_generator": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "critic": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "red_team": { "type": "integer", "minimum": 0, "maximum": 5 },
+        "curator": { "type": "integer", "minimum": 0, "maximum": 5 }
+      }
+    },
+    "roleArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "output_hash", "output_path", "usage", "status"],
+      "properties": {
+        "role": { "$ref": "#/$defs/role" },
+        "output_hash": { "$ref": "#/$defs/contentHash" },
+        "output_path": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^role-outputs/[a-z][a-z0-9_-]{2,79}/(?:observer|direction_generator|critic|red_team|curator)\\.json$",
+              "maxLength": 180
+            },
+            { "type": "null" }
+          ]
+        },
+        "usage": { "$ref": "#/$defs/providerUsage" },
+        "status": { "enum": ["completed", "failed"] }
+      }
+    },
+    "providerUsage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prompt_tokens", "completion_tokens", "calls", "estimated_cost"],
+      "properties": {
+        "prompt_tokens": { "type": "integer", "minimum": 0 },
+        "completion_tokens": { "type": "integer", "minimum": 0 },
+        "calls": { "type": "integer", "minimum": 0, "maximum": 1 },
+        "estimated_cost": { "type": "number", "minimum": 0, "maximum": 1000000 }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "evidence", "role", "severity", "validation_status"],
+      "properties": {
+        "code": { "type": "string", "pattern": "^[a-z][a-z0-9_]{2,79}$" },
+        "evidence": { "type": "string", "minLength": 3, "maxLength": 300 },
+        "role": {
+          "enum": ["critic", "red_team", "deterministic_gate"]
+        },
+        "severity": { "enum": ["info", "warning", "blocking"] },
+        "validation_status": {
+          "enum": ["model_suggested", "confirmed_by_gate", "disputed", "quarantined"]
+        }
+      }
+    },
+    "artifactReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "content_hash"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^artifacts/[a-z][a-z0-9_-]{2,79}\\.json$",
+          "maxLength": 120
+        },
+        "content_hash": { "$ref": "#/$defs/contentHash" }
+      }
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "retryable"],
+      "properties": {
+        "code": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]{2,79}$" },
+        "message": { "type": "string", "minLength": 3, "maxLength": 240 },
+        "retryable": { "type": "boolean" },
+        "repair_context": { "$ref": "#/$defs/repairContext" }
+      }
+    },
+    "repairContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "reason_code",
+        "role",
+        "previous_attempt",
+        "allowed_evidence_ids",
+        "excluded_candidate_count"
+      ],
+      "properties": {
+        "schema_version": { "const": "1.0" },
+        "reason_code": {
+          "enum": [
+            "schema_invalid",
+            "observer_contract_invalid",
+            "direction_contract_invalid",
+            "all_direction_options_excluded",
+            "sensitive_output",
+            "upstream_transient",
+            "timeout",
+            "usage_invalid",
+            "unknown_failure"
+          ]
+        },
+        "role": { "$ref": "#/$defs/role" },
+        "previous_attempt": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "allowed_evidence_ids": {
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
+          }
+        },
+        "excluded_candidate_count": { "type": "integer", "minimum": 0, "maximum": 8 }
+      }
+    },
+    "callRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "call_id",
+        "asset_id",
+        "role",
+        "attempt",
+        "status",
+        "started_at",
+        "completed_at",
+        "latency_ms",
+        "usage",
+        "error"
+      ],
+      "properties": {
+        "call_id": { "$ref": "#/$defs/identifier" },
+        "asset_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{2,79}$"
+        },
+        "role": { "$ref": "#/$defs/role" },
+        "attempt": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "status": { "enum": ["successful", "failed", "uncertain"] },
+        "started_at": { "$ref": "#/$defs/timestamp" },
+        "completed_at": { "$ref": "#/$defs/timestamp" },
+        "latency_ms": { "type": "integer", "minimum": 0, "maximum": 3600000 },
+        "usage": { "$ref": "#/$defs/providerUsage" },
+        "error": {
+          "anyOf": [
+            { "$ref": "#/$defs/error" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asset_id",
+        "dataset_split",
+        "state",
+        "current_role",
+        "attempts",
+        "role_artifacts",
+        "findings",
+        "outcome",
+        "artifact",
+        "last_error",
+        "updated_at"
+      ],
+      "properties": {
+        "asset_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{2,79}$"
+        },
+        "dataset_split": { "enum": ["training", "regression", "holdout"] },
+        "state": { "$ref": "#/$defs/executionState" },
+        "current_role": {
+          "anyOf": [
+            { "$ref": "#/$defs/role" },
+            { "type": "null" }
+          ]
+        },
+        "attempts": { "$ref": "#/$defs/attempts" },
+        "role_artifacts": {
+          "type": "array",
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/roleArtifact" }
+        },
+        "findings": {
+          "type": "array",
+          "maxItems": 32,
+          "items": { "$ref": "#/$defs/finding" }
+        },
+        "outcome": {
+          "type": ["string", "null"],
+          "enum": [null, "completed", "quarantined", "failed", "cancelled"]
+        },
+        "artifact": {
+          "anyOf": [
+            { "$ref": "#/$defs/artifactReference" },
+            { "type": "null" }
+          ]
+        },
+        "last_error": {
+          "anyOf": [
+            { "$ref": "#/$defs/error" },
+            { "type": "null" }
+          ]
+        },
+        "updated_at": { "$ref": "#/$defs/timestamp" }
+      }
+    }
+  }
+}

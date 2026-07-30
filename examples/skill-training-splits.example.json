@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "photography-skill-contract-fixture",
+  "dataset_version": "1.0.0",
+  "frozen": true,
+  "frozen_at": "2026-07-24T08:00:00Z",
+  "content_hash": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "partitions": {
+    "training": ["landscape_training_001"],
+    "regression": ["urban_regression_001"],
+    "holdout": ["difficult_holdout_001"]
+  }
+}

@@ -1,0 +1,368 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/skill-evaluation-report.schema.json",
+  "title": "照见 Skill 候选评测报告",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evaluation_id",
+    "phase",
+    "status",
+    "baseline_skill",
+    "candidate_skill",
+    "source",
+    "dataset",
+    "comparison_config",
+    "metrics",
+    "split_results",
+    "gates",
+    "failures",
+    "telemetry",
+    "shadow_observation_id",
+    "eligible_for_shadow",
+    "eligible_for_activation",
+    "actor",
+    "reason",
+    "command",
+    "evaluated_at",
+    "validation_status",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "evaluation_id": { "$ref": "#/$defs/identifier" },
+    "phase": { "enum": ["candidate", "shadow"] },
+    "status": { "enum": ["passed", "blocked"] },
+    "baseline_skill": { "$ref": "#/$defs/versionedReference" },
+    "candidate_skill": { "$ref": "#/$defs/versionedReference" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baseline_report_id",
+        "baseline_run_id",
+        "baseline_report_hash",
+        "candidate_report_id",
+        "candidate_run_id",
+        "candidate_report_hash",
+        "provider",
+        "model",
+        "prompt_version",
+        "schema_version",
+        "pricing_version",
+        "evaluation_set_version"
+      ],
+      "properties": {
+        "baseline_report_id": { "$ref": "#/$defs/identifier" },
+        "baseline_run_id": { "$ref": "#/$defs/identifier" },
+        "baseline_report_hash": { "$ref": "#/$defs/contentHash" },
+        "candidate_report_id": { "$ref": "#/$defs/identifier" },
+        "candidate_run_id": { "$ref": "#/$defs/identifier" },
+        "candidate_report_hash": { "$ref": "#/$defs/contentHash" },
+        "provider": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "model": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "prompt_version": { "$ref": "#/$defs/semanticVersion" },
+        "schema_version": { "$ref": "#/$defs/semanticVersion" },
+        "pricing_version": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "evaluation_set_version": { "$ref": "#/$defs/semanticVersion" }
+      }
+    },
+    "dataset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "content_hash", "selection_hash"],
+      "properties": {
+        "id": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "version": { "$ref": "#/$defs/semanticVersion" },
+        "content_hash": { "$ref": "#/$defs/contentHash" },
+        "selection_hash": { "$ref": "#/$defs/contentHash" }
+      }
+    },
+    "comparison_config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtime_version",
+        "max_cost_increase_ratio",
+        "max_average_latency_increase_ratio",
+        "max_latency_increase_ratio",
+        "require_all_splits"
+      ],
+      "properties": {
+        "runtime_version": { "$ref": "#/$defs/semanticVersion" },
+        "max_cost_increase_ratio": { "type": "number", "minimum": 0, "maximum": 10 },
+        "max_average_latency_increase_ratio": { "type": "number", "minimum": 0, "maximum": 10 },
+        "max_latency_increase_ratio": { "type": "number", "minimum": 0, "maximum": 10 },
+        "require_all_splits": { "const": true }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/metricComparison" }
+    },
+    "split_results": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/splitResult" }
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/gate" }
+    },
+    "failures": {
+      "type": "array",
+      "maxItems": 500,
+      "items": { "$ref": "#/$defs/failure" }
+    },
+    "telemetry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["baseline", "candidate"],
+      "properties": {
+        "baseline": { "$ref": "#/$defs/telemetrySnapshot" },
+        "candidate": { "$ref": "#/$defs/telemetrySnapshot" }
+      }
+    },
+    "shadow_observation_id": {
+      "type": ["string", "null"],
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
+    },
+    "eligible_for_shadow": { "type": "boolean" },
+    "eligible_for_activation": { "type": "boolean" },
+    "actor": { "$ref": "#/$defs/identifier" },
+    "reason": { "type": "string", "minLength": 8, "maxLength": 300 },
+    "command": { "type": "string", "minLength": 3, "maxLength": 300 },
+    "evaluated_at": { "$ref": "#/$defs/timestamp" },
+    "validation_status": { "enum": ["passed", "failed"] },
+    "content_hash": { "$ref": "#/$defs/contentHash" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "const": "passed" } },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "validation_status": { "const": "passed" },
+          "failures": { "type": "array", "maxItems": 0 },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": { "passed": { "const": true } }
+            }
+          },
+          "split_results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "new_blocking_failures": { "const": 0 },
+                "passed": { "const": true }
+              }
+            }
+          },
+          "gates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": { "passed": { "const": true } }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "validation_status": { "const": "failed" },
+          "eligible_for_shadow": { "const": false },
+          "eligible_for_activation": { "const": false }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "phase": { "const": "candidate" } },
+        "required": ["phase"]
+      },
+      "then": {
+        "properties": {
+          "shadow_observation_id": { "type": "null" },
+          "eligible_for_activation": { "const": false }
+        }
+      },
+      "else": {
+        "properties": {
+          "shadow_observation_id": { "type": "string" },
+          "eligible_for_shadow": { "const": false }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
+    },
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$",
+      "maxLength": 64
+    },
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    },
+    "contentHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "versionedReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "content_hash"],
+      "properties": {
+        "id": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "version": { "$ref": "#/$defs/semanticVersion" },
+        "content_hash": { "$ref": "#/$defs/contentHash" }
+      }
+    },
+    "metricComparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dimension",
+        "direction",
+        "baseline_value",
+        "candidate_value",
+        "delta",
+        "threshold",
+        "passed"
+      ],
+      "properties": {
+        "dimension": {
+          "enum": [
+            "json_parse_rate",
+            "serious_hallucination_rate",
+            "intent_response_rate",
+            "direction_difference_rate",
+            "grounding_rate",
+            "clarification_effectiveness_rate",
+            "field_executability_rate",
+            "gear_feasibility_rate",
+            "judge_language_rate"
+          ]
+        },
+        "direction": { "enum": ["higher", "lower"] },
+        "baseline_value": { "type": "number", "minimum": 0, "maximum": 1 },
+        "candidate_value": { "type": "number", "minimum": 0, "maximum": 1 },
+        "delta": { "type": "number", "minimum": -1, "maximum": 1 },
+        "threshold": { "type": "number", "minimum": 0, "maximum": 1 },
+        "passed": { "type": "boolean" }
+      }
+    },
+    "splitResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "split",
+        "asset_count",
+        "baseline_blocking_failures",
+        "candidate_blocking_failures",
+        "new_blocking_failures",
+        "passed"
+      ],
+      "properties": {
+        "split": { "enum": ["training", "regression", "holdout"] },
+        "asset_count": { "type": "integer", "minimum": 1, "maximum": 60 },
+        "baseline_blocking_failures": { "type": "integer", "minimum": 0, "maximum": 500 },
+        "candidate_blocking_failures": { "type": "integer", "minimum": 0, "maximum": 500 },
+        "new_blocking_failures": { "type": "integer", "minimum": 0, "maximum": 500 },
+        "passed": { "type": "boolean" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "split": { "const": "training" } },
+            "required": ["split"]
+          },
+          "then": { "properties": { "asset_count": { "const": 36 } } }
+        },
+        {
+          "if": {
+            "properties": { "split": { "const": "regression" } },
+            "required": ["split"]
+          },
+          "then": { "properties": { "asset_count": { "const": 12 } } }
+        },
+        {
+          "if": {
+            "properties": { "split": { "const": "holdout" } },
+            "required": ["split"]
+          },
+          "then": { "properties": { "asset_count": { "const": 12 } } }
+        }
+      ]
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "passed", "evidence"],
+      "properties": {
+        "code": {
+          "enum": [
+            "provenance_complete",
+            "dataset_comparable",
+            "skill_content_integrity",
+            "historical_compatibility",
+            "fixed_regression",
+            "holdout_regression",
+            "serious_failure_regression",
+            "cost_limit",
+            "latency_limit",
+            "rollback_ready",
+            "shadow_observation"
+          ]
+        },
+        "passed": { "type": "boolean" },
+        "evidence": { "type": "string", "minLength": 3, "maxLength": 300 }
+      }
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "evidence", "asset_id", "rule", "baseline_version", "candidate_version"],
+      "properties": {
+        "code": { "type": "string", "pattern": "^[a-z][a-z0-9_]{2,79}$" },
+        "evidence": { "type": "string", "minLength": 3, "maxLength": 300 },
+        "asset_id": {
+          "type": ["string", "null"],
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
+        },
+        "rule": { "type": "string", "pattern": "^[a-z][a-z0-9_]{2,79}$" },
+        "baseline_version": { "$ref": "#/$defs/semanticVersion" },
+        "candidate_version": { "$ref": "#/$defs/semanticVersion" }
+      }
+    },
+    "telemetrySnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["estimated_cost", "cost_per_successful_call", "average_latency_ms", "max_latency_ms"],
+      "properties": {
+        "estimated_cost": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "cost_per_successful_call": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "average_latency_ms": { "type": "integer", "minimum": 0 },
+        "max_latency_ms": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/skill-training-exposure-ledger.schema.json",
+  "title": "照见 Skill 训练样本暴露账本",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "ledger_id",
+    "created_at",
+    "dataset",
+    "summary",
+    "assets",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "ledger_id": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{2,79}$" },
+    "created_at": { "$ref": "#/$defs/timestamp" },
+    "dataset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "content_hash"],
+      "properties": {
+        "id": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "version": { "type": "string", "minLength": 3, "maxLength": 64 },
+        "content_hash": { "$ref": "#/$defs/contentHash" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asset_count",
+        "selected_exposed_count",
+        "provider_exposed_count",
+        "holdout_count",
+        "holdout_exposed_count",
+        "unseen_holdout_count"
+      ],
+      "properties": {
+        "asset_count": { "type": "integer", "minimum": 1, "maximum": 10000 },
+        "selected_exposed_count": { "type": "integer", "minimum": 0, "maximum": 10000 },
+        "provider_exposed_count": { "type": "integer", "minimum": 0, "maximum": 10000 },
+        "holdout_count": { "type": "integer", "minimum": 0, "maximum": 10000 },
+        "holdout_exposed_count": { "type": "integer", "minimum": 0, "maximum": 10000 },
+        "unseen_holdout_count": { "type": "integer", "minimum": 0, "maximum": 10000 }
+      }
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10000,
+      "items": { "$ref": "#/$defs/assetExposure" }
+    },
+    "content_hash": { "$ref": "#/$defs/contentHash" }
+  },
+  "$defs": {
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    },
+    "contentHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "assetExposure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asset_id",
+        "dataset_split",
+        "source_url",
+        "content_hash",
+        "selected_exposed",
+        "provider_exposed",
+        "live_completed",
+        "mock_seen",
+        "potential_iteration_influence",
+        "run_ids",
+        "prompt_versions",
+        "first_seen_at",
+        "last_seen_at",
+        "unseen_eligible"
+      ],
+      "properties": {
+        "asset_id": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{2,79}$" },
+        "dataset_split": { "enum": ["training", "regression", "holdout"] },
+        "source_url": { "type": "string", "pattern": "^https://[^\\s]+$" },
+        "content_hash": { "$ref": "#/$defs/contentHash" },
+        "selected_exposed": { "type": "boolean" },
+        "provider_exposed": { "type": "boolean" },
+        "live_completed": { "type": "boolean" },
+        "mock_seen": { "type": "boolean" },
+        "potential_iteration_influence": { "type": "boolean" },
+        "run_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 3, "maxLength": 128 }
+        },
+        "prompt_versions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 3, "maxLength": 64 }
+        },
+        "first_seen_at": {
+          "anyOf": [
+            { "$ref": "#/$defs/timestamp" },
+            { "type": "null" }
+          ]
+        },
+        "last_seen_at": {
+          "anyOf": [
+            { "$ref": "#/$defs/timestamp" },
+            { "type": "null" }
+          ]
+        },
+        "unseen_eligible": { "type": "boolean" }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+name: 缺陷报告
+description: 提交可复现的工程或产品缺陷
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。请勿上传真实密钥、用户图片、GPS、完整 EXIF、数据库或未脱敏日志。
+  - type: input
+    id: version
+    attributes:
+      label: 版本或提交
+      placeholder: 例如 1.0.0-beta.1 或提交哈希
+    validations:
+      required: true
+  - type: textarea
+    id: scenario
+    attributes:
+      label: 使用场景
+      description: 描述你想完成的摄影任务和当前环境。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 最小复现步骤
+      placeholder: |
+        1. …
+        2. …
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: 实际结果与预期结果
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 运行环境
+      description: 操作系统、浏览器、Node.js 和 .NET 版本；请先脱敏。
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 提交检查
+      options:
+        - label: 我确认没有提交密钥、个人信息、真实用户图片或未经授权的摄影作品。
+          required: true
+        - label: 这不是未公开的安全漏洞；安全问题将按 SECURITY.md 私密报告。
+          required: true

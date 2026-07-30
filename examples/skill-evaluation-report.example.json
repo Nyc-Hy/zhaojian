@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "evaluation_id": "evaluation_fixture_candidate_001",
+  "phase": "candidate",
+  "status": "passed",
+  "baseline_skill": {
+    "id": "observe-scene",
+    "version": "1.0.0",
+    "content_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "candidate_skill": {
+    "id": "observe-scene",
+    "version": "1.1.0",
+    "content_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "source": {
+    "baseline_report_id": "report_baseline_fixture_001",
+    "baseline_run_id": "run_baseline_fixture_001",
+    "baseline_report_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+    "candidate_report_id": "report_candidate_fixture_001",
+    "candidate_run_id": "run_candidate_fixture_001",
+    "candidate_report_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+    "provider": "mock",
+    "model": "training-mock-v1",
+    "prompt_version": "1.0.0",
+    "schema_version": "1.1.0",
+    "pricing_version": "mock-unpriced",
+    "evaluation_set_version": "1.0.0"
+  },
+  "dataset": {
+    "id": "photography-skill-v1",
+    "version": "1.0.0",
+    "content_hash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+    "selection_hash": "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+  },
+  "comparison_config": {
+    "runtime_version": "1.0.0",
+    "max_cost_increase_ratio": 0.2,
+    "max_average_latency_increase_ratio": 0.2,
+    "max_latency_increase_ratio": 0.25,
+    "require_all_splits": true
+  },
+  "metrics": [
+    { "dimension": "json_parse_rate", "direction": "higher", "baseline_value": 1, "candidate_value": 1, "delta": 0, "threshold": 0.95, "passed": true },
+    { "dimension": "serious_hallucination_rate", "direction": "lower", "baseline_value": 0, "candidate_value": 0, "delta": 0, "threshold": 0, "passed": true },
+    { "dimension": "intent_response_rate", "direction": "higher", "baseline_value": 1, "candidate_value": 1, "delta": 0, "threshold": 0.9, "passed": true },
+    { "dimension": "direction_difference_rate", "direction": "higher", "baseline_value": 1, "candidate_value": 1, "delta": 0, "threshold": 0.8, "passed": true },
+    { "dimension": "grounding_rate", "direction": "higher", "baseline_value": 1, "candidate_value": 1, "delta": 0, "threshold": 0.9, "passed": true },
+    { "dimension": "clarification_effectiveness_rate", "direction": "higher", "baseline_value": 1, "candidate_value": 1, "delta": 0, "threshold": 0.8, "passed": true },
+    { "dimension": "field_executability_rate", "direction": "higher", "baseline_value": 1, "candidate_value": 1, "delta": 0, "threshold": 0.85, "passed": true },
+    { "dimension": "gear_feasibility_rate", "direction": "higher", "baseline_value": 1, "candidate_value": 1, "delta": 0, "threshold": 0.95, "passed": true },
+    { "dimension": "judge_language_rate", "direction": "lower", "baseline_value": 0, "candidate_value": 0, "delta": 0, "threshold": 0, "passed": true }
+  ],
+  "split_results": [
+    { "split": "training", "asset_count": 36, "baseline_blocking_failures": 0, "candidate_blocking_failures": 0, "new_blocking_failures": 0, "passed": true },
+    { "split": "regression", "asset_count": 12, "baseline_blocking_failures": 0, "candidate_blocking_failures": 0, "new_blocking_failures": 0, "passed": true },
+    { "split": "holdout", "asset_count": 12, "baseline_blocking_failures": 0, "candidate_blocking_failures": 0, "new_blocking_failures": 0, "passed": true }
+  ],
+  "gates": [
+    { "code": "provenance_complete", "passed": true, "evidence": "模型、提示词、Schema、数据集与计价版本均已记录。" },
+    { "code": "dataset_comparable", "passed": true, "evidence": "基线与候选使用相同 60 图和固定分区。" },
+    { "code": "skill_content_integrity", "passed": true, "evidence": "两个 Skill 资源包内容哈希均通过。" },
+    { "code": "historical_compatibility", "passed": true, "evidence": "输入输出 Schema 主版本和运行时范围兼容。" },
+    { "code": "fixed_regression", "passed": true, "evidence": "固定回归集没有新增阻断失败。" },
+    { "code": "holdout_regression", "passed": true, "evidence": "保留集没有新增阻断失败。" },
+    { "code": "serious_failure_regression", "passed": true, "evidence": "未新增严重虚构、危险机位、身份推断、隐私或裁判语言问题。" },
+    { "code": "cost_limit", "passed": true, "evidence": "候选单次成功调用成本没有超过阈值。" },
+    { "code": "latency_limit", "passed": true, "evidence": "候选平均和最大延迟没有超过阈值。" },
+    { "code": "rollback_ready", "passed": true, "evidence": "活动基线版本仍完整可读，可作为回滚目标。" },
+    { "code": "shadow_observation", "passed": true, "evidence": "candidate 阶段不要求 shadow 运行证据。" }
+  ],
+  "failures": [],
+  "telemetry": {
+    "baseline": {
+      "estimated_cost": 0,
+      "cost_per_successful_call": 0,
+      "average_latency_ms": 0,
+      "max_latency_ms": 0
+    },
+    "candidate": {
+      "estimated_cost": 0,
+      "cost_per_successful_call": 0,
+      "average_latency_ms": 0,
+      "max_latency_ms": 0
+    }
+  },
+  "shadow_observation_id": null,
+  "eligible_for_shadow": true,
+  "eligible_for_activation": false,
+  "actor": "release_fixture",
+  "reason": "验证候选进入 shadow 前的固定评测门禁。",
+  "command": "npm run skill:evaluate -- --phase candidate",
+  "evaluated_at": "2026-07-27T12:00:00Z",
+  "validation_status": "passed",
+  "content_hash": "sha256:7777777777777777777777777777777777777777777777777777777777777777"
+}

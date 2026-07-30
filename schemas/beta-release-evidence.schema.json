@@ -1,0 +1,345 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.local/schemas/beta-release-evidence.schema.json",
+  "title": "照见 Beta 发布证据",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "release_version",
+    "release_scope",
+    "status",
+    "generated_at",
+    "source",
+    "deployment",
+    "commands",
+    "artifacts",
+    "drills",
+    "real_model_evaluation",
+    "manual_records",
+    "gates",
+    "known_limitations_path",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "release_version": { "type": "string", "pattern": "^1\\.0\\.0-beta\\.[1-9][0-9]*$" },
+    "release_scope": { "const": "engineering_beta" },
+    "status": { "enum": ["ready", "blocked"] },
+    "generated_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "source": { "$ref": "#/$defs/source" },
+    "deployment": { "$ref": "#/$defs/deployment" },
+    "commands": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "prefixItems": [
+        { "allOf": [{ "$ref": "#/$defs/command" }, { "type": "object", "properties": { "id": { "const": "skill_validate" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/command" }, { "type": "object", "properties": { "id": { "const": "mock_full60" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/command" }, { "type": "object", "properties": { "id": { "const": "budget_cap_drill" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/command" }, { "type": "object", "properties": { "id": { "const": "registry_rollback_kill_switch_drill" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/command" }, { "type": "object", "properties": { "id": { "const": "account_data_lifecycle_drill" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/command" }, { "type": "object", "properties": { "id": { "const": "offline_verify" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/command" }, { "type": "object", "properties": { "id": { "const": "fixed_evaluation" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/command" }, { "type": "object", "properties": { "id": { "const": "skill_registry_audit" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/command" }, { "type": "object", "properties": { "id": { "const": "release_publish" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/command" }, { "type": "object", "properties": { "id": { "const": "package_release" } } }] }
+      ],
+      "items": false
+    },
+    "artifacts": {
+      "type": "array",
+      "oneOf": [
+        { "maxItems": 0 },
+        {
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "id": { "const": "release_bundle" } } }] },
+            { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "id": { "const": "mock_full60_report" } } }] }
+          ],
+          "items": false
+        }
+      ]
+    },
+    "drills": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "prefixItems": [
+        { "allOf": [{ "$ref": "#/$defs/evidenceItem" }, { "type": "object", "properties": { "id": { "const": "budget_cap" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/evidenceItem" }, { "type": "object", "properties": { "id": { "const": "skill_rollback" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/evidenceItem" }, { "type": "object", "properties": { "id": { "const": "cloud_kill_switch" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/evidenceItem" }, { "type": "object", "properties": { "id": { "const": "account_data_lifecycle" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/evidenceItem" }, { "type": "object", "properties": { "id": { "const": "fixed_regression" } } }] }
+      ],
+      "items": false
+    },
+    "real_model_evaluation": { "$ref": "#/$defs/realModelEvaluation" },
+    "manual_records": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        { "allOf": [{ "$ref": "#/$defs/manualRecord" }, { "type": "object", "properties": { "id": { "const": "browser_core_loop" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/manualRecord" }, { "type": "object", "properties": { "id": { "const": "public_store_launch" } } }] }
+      ],
+      "items": false
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "prefixItems": [
+        { "allOf": [{ "$ref": "#/$defs/evidenceItem" }, { "type": "object", "properties": { "id": { "const": "version_consistency" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/evidenceItem" }, { "type": "object", "properties": { "id": { "const": "source_artifact_consistency" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/evidenceItem" }, { "type": "object", "properties": { "id": { "const": "offline_engineering" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/evidenceItem" }, { "type": "object", "properties": { "id": { "const": "runtime_drills" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/evidenceItem" }, { "type": "object", "properties": { "id": { "const": "real_model_full60" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/evidenceItem" }, { "type": "object", "properties": { "id": { "const": "single_instance_boundary" } } }] }
+      ],
+      "items": false
+    },
+    "known_limitations_path": { "$ref": "#/$defs/path" },
+    "content_hash": { "$ref": "#/$defs/hash" }
+  },
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "not": { "pattern": "(^|/)\\.\\.(/|$)" }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["git_commit", "worktree_dirty", "source_content_hash", "version_files"],
+      "properties": {
+        "git_commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "worktree_dirty": { "type": "boolean" },
+        "source_content_hash": { "$ref": "#/$defs/hash" },
+        "version_files": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 8,
+          "items": { "$ref": "#/$defs/path" }
+        }
+      }
+    },
+    "deployment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "database",
+        "task_queue",
+        "quota_store",
+        "image_store",
+        "multi_instance_ready"
+      ],
+      "properties": {
+        "mode": { "const": "single_instance" },
+        "database": { "const": "sqlite" },
+        "task_queue": { "const": "in_process_channel" },
+        "quota_store": { "const": "in_memory" },
+        "image_store": { "const": "sqlite_blob" },
+        "multi_instance_ready": { "const": false }
+      }
+    },
+    "command": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "command", "status", "exit_code", "duration_ms", "log_path"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]{3,64}$"
+        },
+        "command": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "status": { "enum": ["passed", "failed"] },
+        "exit_code": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "log_path": { "$ref": "#/$defs/path" }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "sha256", "bytes"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]{3,64}$"
+        },
+        "path": { "$ref": "#/$defs/path" },
+        "sha256": { "$ref": "#/$defs/hash" },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "evidenceItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "status", "evidence"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]{3,64}$"
+        },
+        "status": { "enum": ["passed", "blocked"] },
+        "evidence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 800
+        }
+      }
+    },
+    "manualRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "status", "evidence"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]{3,64}$"
+        },
+        "status": { "enum": ["passed", "deferred", "not_applicable"] },
+        "evidence": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 800
+        }
+      }
+    },
+    "realModelEvaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "report_path",
+        "run_id",
+        "provider",
+        "model",
+        "dataset_id",
+        "dataset_version",
+        "dataset_content_hash",
+        "report_content_hash",
+        "selection_content_hash",
+        "selected_asset_count",
+        "provider_calls",
+        "successful_calls",
+        "failed_calls",
+        "repaired_calls",
+        "unresolved_failed_calls",
+        "uncertain_calls",
+        "recovered_uncertain_calls",
+        "unresolved_uncertain_calls",
+        "quarantined_assets",
+        "prompt_tokens",
+        "completion_tokens",
+        "estimated_cost_cny",
+        "average_latency_ms",
+        "max_latency_ms",
+        "metric_count",
+        "metrics_passed",
+        "pricing_version",
+        "prompt_version",
+        "schema_version",
+        "independence_level",
+        "role_count",
+        "skill_snapshots"
+      ],
+      "properties": {
+        "status": { "enum": ["passed", "missing", "not_authorized", "failed"] },
+        "report_path": {
+          "oneOf": [
+            { "$ref": "#/$defs/path" },
+            { "type": "null" }
+          ]
+        },
+        "run_id": { "type": ["string", "null"], "maxLength": 160 },
+        "provider": { "type": ["string", "null"], "maxLength": 80 },
+        "model": { "type": ["string", "null"], "maxLength": 160 },
+        "dataset_id": { "type": ["string", "null"], "maxLength": 160 },
+        "dataset_version": { "type": ["string", "null"], "maxLength": 80 },
+        "dataset_content_hash": {
+          "oneOf": [
+            { "$ref": "#/$defs/hash" },
+            { "type": "null" }
+          ]
+        },
+        "report_content_hash": {
+          "oneOf": [
+            { "$ref": "#/$defs/hash" },
+            { "type": "null" }
+          ]
+        },
+        "selection_content_hash": {
+          "oneOf": [
+            { "$ref": "#/$defs/hash" },
+            { "type": "null" }
+          ]
+        },
+        "selected_asset_count": { "type": "integer", "minimum": 0, "maximum": 60 },
+        "provider_calls": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "successful_calls": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "failed_calls": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "repaired_calls": { "type": "integer", "minimum": 0, "maximum": 15 },
+        "unresolved_failed_calls": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "uncertain_calls": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "recovered_uncertain_calls": { "type": "integer", "minimum": 0, "maximum": 1 },
+        "unresolved_uncertain_calls": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "quarantined_assets": { "type": "integer", "minimum": 0, "maximum": 60 },
+        "prompt_tokens": { "type": "integer", "minimum": 0 },
+        "completion_tokens": { "type": "integer", "minimum": 0 },
+        "estimated_cost_cny": { "type": "number", "minimum": 0 },
+        "average_latency_ms": { "type": "integer", "minimum": 0 },
+        "max_latency_ms": { "type": "integer", "minimum": 0 },
+        "metric_count": { "type": "integer", "minimum": 0, "maximum": 32 },
+        "metrics_passed": { "type": "boolean" },
+        "pricing_version": { "type": ["string", "null"], "maxLength": 200 },
+        "prompt_version": { "type": ["string", "null"], "maxLength": 80 },
+        "schema_version": { "type": ["string", "null"], "maxLength": 80 },
+        "independence_level": { "type": ["string", "null"], "maxLength": 100 },
+        "role_count": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "skill_snapshots": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "version", "content_hash"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1, "maxLength": 100 },
+              "version": { "type": "string", "minLength": 1, "maxLength": 80 },
+              "content_hash": { "$ref": "#/$defs/hash" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

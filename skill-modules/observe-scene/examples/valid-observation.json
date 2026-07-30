@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.1",
+  "request_id": "skill_example_observe_001",
+  "language": "zh-CN",
+  "observations": {
+    "summary": "近处树枝遮挡远处山脊，湖面亮区位于两者之间。",
+    "attention_candidates": [
+      {
+        "label": "湖面亮区",
+        "evidence": "画面中部存在连续的高亮带状区域。",
+        "confidence": 0.92
+      }
+    ],
+    "visual_relations": [
+      {
+        "elements": ["近处树枝", "远处山脊"],
+        "relation": "depth_layering",
+        "evidence": "树枝轮廓位于山脊之前并发生局部遮挡。",
+        "confidence": 0.94
+      }
+    ],
+    "spatial_layers": ["近处树枝", "中部湖面", "远处山脊"],
+    "light": {
+      "direction": "back",
+      "contrast": "high",
+      "highlight_risk": "medium"
+    },
+    "uncertainties": [],
+    "factual_confidence": 0.91
+  },
+  "technical_observations": {
+    "motion": "subtle",
+    "dynamic_range": "high",
+    "light_change": "changing",
+    "confidence": 0.82
+  }
+}

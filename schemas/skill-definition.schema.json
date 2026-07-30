@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/skill-definition.schema.json",
+  "title": "照见 Skill 定义",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "skill_id",
+    "skill_version",
+    "status",
+    "description",
+    "trigger",
+    "input_schema_version",
+    "output_schema_version",
+    "instruction_version",
+    "reference_version",
+    "validator_version",
+    "evaluation_set_version",
+    "compatible_runtime",
+    "provider_requirements",
+    "artifacts",
+    "content_hash",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "skill_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 64
+    },
+    "skill_version": { "$ref": "#/$defs/semanticVersion" },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "candidate", "shadow", "active", "retired"]
+    },
+    "description": { "type": "string", "minLength": 8, "maxLength": 240 },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_types", "required_inputs", "optional_context"],
+      "properties": {
+        "task_types": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]{2,63}$" }
+        },
+        "required_inputs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/identifier" }
+        },
+        "optional_context": {
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/identifier" }
+        }
+      }
+    },
+    "input_schema_version": { "$ref": "#/$defs/versionReference" },
+    "output_schema_version": { "$ref": "#/$defs/versionReference" },
+    "instruction_version": { "$ref": "#/$defs/semanticVersion" },
+    "reference_version": { "$ref": "#/$defs/semanticVersion" },
+    "validator_version": { "$ref": "#/$defs/semanticVersion" },
+    "evaluation_set_version": { "$ref": "#/$defs/semanticVersion" },
+    "compatible_runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum", "maximum_exclusive"],
+      "properties": {
+        "minimum": { "$ref": "#/$defs/semanticVersion" },
+        "maximum_exclusive": { "$ref": "#/$defs/semanticVersion" }
+      }
+    },
+    "provider_requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capabilities", "minimum_context_tokens"],
+      "properties": {
+        "capabilities": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["vision", "text", "structured_output", "tool_calling"]
+          }
+        },
+        "minimum_context_tokens": {
+          "type": "integer",
+          "minimum": 1024,
+          "maximum": 2000000
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["instructions_path", "reference_paths", "example_paths", "negative_example_paths", "validator_id"],
+      "properties": {
+        "instructions_path": { "$ref": "#/$defs/relativePath" },
+        "reference_paths": {
+          "type": "array",
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/relativePath" }
+        },
+        "example_paths": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/relativePath" }
+        },
+        "negative_example_paths": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/relativePath" }
+        },
+        "validator_id": { "$ref": "#/$defs/identifier" }
+      }
+    },
+    "content_hash": { "$ref": "#/$defs/contentHash" },
+    "created_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{2,63}$"
+    },
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$",
+      "maxLength": 64
+    },
+    "versionReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_id", "version"],
+      "properties": {
+        "schema_id": { "type": "string", "pattern": "^[a-z][a-z0-9-]{2,63}$" },
+        "version": { "$ref": "#/$defs/semanticVersion" }
+      }
+    },
+    "relativePath": {
+      "type": "string",
+      "pattern": "^(?!/)(?!.*\\.\\.)[a-zA-Z0-9._/-]+$",
+      "minLength": 3,
+      "maxLength": 240
+    },
+    "contentHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  }
+}

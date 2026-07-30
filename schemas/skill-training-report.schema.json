@@ -1,0 +1,478 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/skill-training-report.schema.json",
+  "title": "照见 Skill 训练报告",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "report_id",
+    "run_id",
+    "status",
+    "dataset",
+    "skills",
+    "run_configuration",
+    "role_runs",
+    "counts",
+    "metrics",
+    "failures",
+    "budget",
+    "checkpoint",
+    "validation_status",
+    "started_at",
+    "completed_at",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": { "enum": ["1.2", "1.3", "1.4", "1.5"] },
+    "report_id": { "$ref": "#/$defs/identifier" },
+    "run_id": { "$ref": "#/$defs/identifier" },
+    "status": {
+      "type": "string",
+      "enum": ["completed", "rejected", "cancelled", "failed"]
+    },
+    "dataset": { "$ref": "#/$defs/versionedReference" },
+    "selection": { "$ref": "#/$defs/selection" },
+    "skills": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/versionedReference" }
+    },
+    "run_configuration": { "$ref": "#/$defs/runConfiguration" },
+    "role_runs": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/roleRun" }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total", "completed", "quarantined", "failed", "cancelled"],
+      "properties": {
+        "total": { "type": "integer", "minimum": 1, "maximum": 500 },
+        "completed": { "type": "integer", "minimum": 0, "maximum": 500 },
+        "quarantined": { "type": "integer", "minimum": 0, "maximum": 500 },
+        "failed": { "type": "integer", "minimum": 0, "maximum": 500 },
+        "cancelled": { "type": "integer", "minimum": 0, "maximum": 500 }
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "maxItems": 32,
+      "items": { "$ref": "#/$defs/metric" }
+    },
+    "failures": {
+      "type": "array",
+      "maxItems": 500,
+      "items": { "$ref": "#/$defs/failure" }
+    },
+    "telemetry": { "$ref": "#/$defs/telemetry" },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "currency",
+        "limit",
+        "estimated_spend",
+        "provider_calls",
+        "uncertain_calls",
+        "pricing_version",
+        "pricing_effective_at",
+        "input_per_million_cny",
+        "output_per_million_cny",
+        "max_cost_per_call",
+        "stopped_new_work",
+        "stop_reason"
+      ],
+      "properties": {
+        "currency": { "const": "CNY" },
+        "limit": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "estimated_spend": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "provider_calls": { "type": "integer", "minimum": 0 },
+        "uncertain_calls": { "type": "integer", "minimum": 0 },
+        "pricing_version": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "pricing_effective_at": { "$ref": "#/$defs/timestamp" },
+        "input_per_million_cny": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "output_per_million_cny": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "max_cost_per_call": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "stopped_new_work": { "type": "boolean" },
+        "stop_reason": {
+          "type": ["string", "null"],
+          "enum": [
+            null,
+            "budget_exhausted",
+            "provider_call_limit_reached",
+            "item_failure",
+            "cancelled",
+            "fatal_error"
+          ]
+        }
+      }
+    },
+    "checkpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_content_hash", "artifact_count", "comparable_run_key"],
+      "properties": {
+        "run_content_hash": { "$ref": "#/$defs/contentHash" },
+        "artifact_count": { "type": "integer", "minimum": 0, "maximum": 500 },
+        "comparable_run_key": { "$ref": "#/$defs/contentHash" }
+      }
+    },
+    "validation_status": {
+      "type": "string",
+      "enum": ["passed", "failed", "needs_review"]
+    },
+    "started_at": { "$ref": "#/$defs/timestamp" },
+    "completed_at": { "$ref": "#/$defs/timestamp" },
+    "content_hash": { "$ref": "#/$defs/contentHash" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "schema_version": { "enum": ["1.3", "1.4", "1.5"] } },
+        "required": ["schema_version"]
+      },
+      "then": {
+        "required": ["selection", "telemetry"],
+        "properties": {
+          "selection": { "$ref": "#/$defs/selection" },
+          "telemetry": { "$ref": "#/$defs/telemetry" },
+          "run_configuration": {
+            "type": "object",
+            "required": ["max_provider_calls", "selection_hash"],
+            "properties": {
+              "max_provider_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+              "selection_hash": { "$ref": "#/$defs/contentHash" }
+            }
+          },
+          "role_runs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "provider_calls",
+                "successful_calls",
+                "uncertain_calls",
+                "prompt_tokens",
+                "completion_tokens",
+                "estimated_cost",
+                "total_latency_ms",
+                "average_latency_ms",
+                "max_latency_ms"
+              ],
+              "properties": {
+                "provider_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+                "successful_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+                "failed_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+                "uncertain_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+                "prompt_tokens": { "type": "integer", "minimum": 0 },
+                "completion_tokens": { "type": "integer", "minimum": 0 },
+                "estimated_cost": { "type": "number", "minimum": 0, "maximum": 1000000 },
+                "total_latency_ms": { "type": "integer", "minimum": 0 },
+                "average_latency_ms": { "type": "integer", "minimum": 0 },
+                "max_latency_ms": { "type": "integer", "minimum": 0 }
+              }
+            }
+          },
+          "failures": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["failure_code", "failure_reason", "retryable"],
+              "properties": {
+                "failure_code": { "type": "string", "minLength": 3, "maxLength": 80 },
+                "failure_reason": { "type": "string", "minLength": 3, "maxLength": 300 },
+                "retryable": { "type": ["boolean", "null"] }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "schema_version": { "enum": ["1.4", "1.5"] } },
+        "required": ["schema_version"]
+      },
+      "then": {
+        "properties": {
+          "telemetry": {
+            "type": "object",
+            "required": ["failed_calls"],
+            "properties": {
+              "failed_calls": { "type": "integer", "minimum": 0, "maximum": 2500 }
+            }
+          },
+          "role_runs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["failed_calls"],
+              "properties": {
+                "failed_calls": { "type": "integer", "minimum": 0, "maximum": 2500 }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "schema_version": { "const": "1.5" } },
+        "required": ["schema_version"]
+      },
+      "then": {
+        "allOf": [
+          {
+            "if": {
+              "properties": { "status": { "const": "cancelled" } },
+              "required": ["status"]
+            },
+            "then": {
+              "properties": {
+                "metrics": {
+                  "type": "array",
+                  "maxItems": 0
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "metrics": {
+                  "type": "array",
+                  "minItems": 9,
+                  "maxItems": 9,
+                  "uniqueItems": true,
+                  "items": { "$ref": "#/$defs/metric" }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
+    },
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$",
+      "maxLength": 64
+    },
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    },
+    "contentHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "versionedReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "content_hash"],
+      "properties": {
+        "id": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "version": { "$ref": "#/$defs/semanticVersion" },
+        "content_hash": { "$ref": "#/$defs/contentHash" }
+      }
+    },
+    "splitCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["training", "regression", "holdout"],
+      "properties": {
+        "training": { "type": "integer", "minimum": 0, "maximum": 60 },
+        "regression": { "type": "integer", "minimum": 0, "maximum": 60 },
+        "holdout": { "type": "integer", "minimum": 0, "maximum": 60 }
+      }
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strategy",
+        "source_asset_count",
+        "selected_asset_count",
+        "asset_ids",
+        "split_counts",
+        "content_hash"
+      ],
+      "properties": {
+        "strategy": { "enum": ["all", "explicit_asset_ids"] },
+        "source_asset_count": { "type": "integer", "minimum": 1, "maximum": 60 },
+        "selected_asset_count": { "type": "integer", "minimum": 1, "maximum": 60 },
+        "asset_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 60,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{2,79}$"
+          }
+        },
+        "split_counts": { "$ref": "#/$defs/splitCounts" },
+        "content_hash": { "$ref": "#/$defs/contentHash" }
+      }
+    },
+    "independenceLevel": {
+      "type": "string",
+      "enum": ["mock_fixture", "same_model_different_roles", "cross_model"]
+    },
+    "runConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "provider",
+        "model",
+        "prompt_version",
+        "schema_version",
+        "independence_level",
+        "max_attempts",
+        "timeout_ms",
+        "concurrency",
+        "mock_scenario_version",
+        "config_hash"
+      ],
+      "properties": {
+        "mode": { "enum": ["mock", "live"] },
+        "provider": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "model": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "prompt_version": { "$ref": "#/$defs/semanticVersion" },
+        "schema_version": { "$ref": "#/$defs/semanticVersion" },
+        "independence_level": { "$ref": "#/$defs/independenceLevel" },
+        "max_attempts": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "timeout_ms": { "type": "integer", "minimum": 100, "maximum": 600000 },
+        "concurrency": { "type": "integer", "minimum": 1, "maximum": 8 },
+        "fail_fast": { "type": "boolean" },
+        "max_provider_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+        "selection_hash": { "$ref": "#/$defs/contentHash" },
+        "mock_scenario_version": { "$ref": "#/$defs/semanticVersion" },
+        "config_hash": { "$ref": "#/$defs/contentHash" }
+      }
+    },
+    "roleRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "provider",
+        "model",
+        "prompt_version",
+        "schema_version",
+        "independence_level",
+        "attempts",
+        "status"
+      ],
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": ["observer", "direction_generator", "critic", "red_team", "curator"]
+        },
+        "provider": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "model": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "prompt_version": { "$ref": "#/$defs/semanticVersion" },
+        "schema_version": { "$ref": "#/$defs/semanticVersion" },
+        "independence_level": { "$ref": "#/$defs/independenceLevel" },
+        "attempts": { "type": "integer", "minimum": 0, "maximum": 2500 },
+        "provider_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+        "successful_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+        "failed_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+        "uncertain_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+        "prompt_tokens": { "type": "integer", "minimum": 0 },
+        "completion_tokens": { "type": "integer", "minimum": 0 },
+        "estimated_cost": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "total_latency_ms": { "type": "integer", "minimum": 0 },
+        "average_latency_ms": { "type": "integer", "minimum": 0 },
+        "max_latency_ms": { "type": "integer", "minimum": 0 },
+        "status": {
+          "type": "string",
+          "enum": ["completed", "partial", "failed", "cancelled"]
+        }
+      }
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dimension", "measured_value", "threshold", "unit", "passed"],
+      "properties": {
+        "dimension": {
+          "type": "string",
+          "enum": [
+            "json_parse_rate",
+            "serious_hallucination_rate",
+            "intent_response_rate",
+            "direction_difference_rate",
+            "grounding_rate",
+            "clarification_effectiveness_rate",
+            "field_executability_rate",
+            "gear_feasibility_rate",
+            "judge_language_rate"
+          ]
+        },
+        "measured_value": { "type": "number", "minimum": 0, "maximum": 1 },
+        "threshold": { "type": "number", "minimum": 0, "maximum": 1 },
+        "unit": { "const": "ratio" },
+        "passed": { "type": "boolean" }
+      }
+    },
+    "telemetry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider_calls",
+        "successful_calls",
+        "uncertain_calls",
+        "prompt_tokens",
+        "completion_tokens",
+        "estimated_cost",
+        "total_latency_ms",
+        "average_latency_ms",
+        "max_latency_ms"
+      ],
+      "properties": {
+        "provider_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+        "successful_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+        "failed_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+        "uncertain_calls": { "type": "integer", "minimum": 0, "maximum": 2500 },
+        "prompt_tokens": { "type": "integer", "minimum": 0 },
+        "completion_tokens": { "type": "integer", "minimum": 0 },
+        "estimated_cost": { "type": "number", "minimum": 0, "maximum": 1000000 },
+        "total_latency_ms": { "type": "integer", "minimum": 0 },
+        "average_latency_ms": { "type": "integer", "minimum": 0 },
+        "max_latency_ms": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["asset_id", "dimension", "evidence", "role", "validation_status"],
+      "properties": {
+        "asset_id": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "dimension": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "evidence": { "type": "string", "minLength": 3, "maxLength": 300 },
+        "failure_code": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "failure_reason": { "type": "string", "minLength": 3, "maxLength": 300 },
+        "retryable": { "type": ["boolean", "null"] },
+        "role": {
+          "type": "string",
+          "enum": ["observer", "direction_generator", "critic", "red_team", "curator", "deterministic_gate"]
+        },
+        "validation_status": {
+          "type": "string",
+          "enum": ["model_suggested", "confirmed_by_gate", "disputed", "quarantined"]
+        }
+      }
+    }
+  }
+}

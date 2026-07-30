@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.1",
+  "request_id": "scene_understanding_20260717_001",
+  "language": "zh-CN",
+  "observations": {
+    "summary": "画面由岸边石头、湖面、远山和大面积云层组成，山体与云层之间有一处较亮区域。",
+    "attention_candidates": [
+      {
+        "label": "远山与云层之间的亮光",
+        "evidence": "依据来自图片：它是画面中亮度最集中的区域；同时与用户填写的吸引点一致。",
+        "confidence": 0.93,
+        "region": [0.56, 0.3, 0.18, 0.16]
+      },
+      {
+        "label": "湖面与远山的水平关系",
+        "evidence": "依据来自图片：连续的水平层次形成稳定的空间结构。",
+        "confidence": 0.78
+      }
+    ],
+    "visual_relations": [
+      {
+        "elements": ["远山与云层之间的亮光", "远山山脊"],
+        "relation": "tonal_contrast",
+        "evidence": "亮光贴近山脊暗部，两者形成画面中最集中的明暗交界。",
+        "confidence": 0.9
+      },
+      {
+        "elements": ["岸边石头", "湖面", "远山山脊"],
+        "relation": "depth_layering",
+        "evidence": "三个元素从画面下方向远处依次展开，构成可见的近、中、远层次。",
+        "confidence": 0.84
+      },
+      {
+        "elements": ["远山与云层之间的亮光", "画面两侧枝叶"],
+        "relation": "separation",
+        "evidence": "亮光周围仍有天空间隔，两侧枝叶尚未与亮部直接重叠。",
+        "confidence": 0.78
+      },
+      {
+        "elements": ["远山山脊", "湖面"],
+        "relation": "continuation",
+        "evidence": "山脊与湖面的横向边界沿画面宽度延续，形成多段近平行线。",
+        "confidence": 0.8
+      }
+    ],
+    "spatial_layers": ["岸边石头", "湖面", "远山山脊", "天空与云层", "画面两侧枝叶"],
+    "light": {
+      "direction": "back",
+      "contrast": "high",
+      "highlight_risk": "high"
+    },
+    "uncertainties": ["无法从参考图确定真实照度。", "单张图片无法确认云层移动速度。"],
+    "factual_confidence": 0.88
+  },
+  "technical_observations": {
+    "motion": "unknown",
+    "dynamic_range": "high",
+    "light_change": "unknown",
+    "confidence": 0.76,
+    "notes": ["亮部存在细节损失风险，但精确曝光需要现场测光。"]
+  }
+}

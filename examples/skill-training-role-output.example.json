@@ -1,0 +1,60 @@
+{
+  "schema_version": "2.0",
+  "run_id": "run_contract_fixture_001",
+  "asset_id": "landscape_training_001",
+  "role": "direction_generator",
+  "attempt": 1,
+  "provider": "qwen",
+  "model": "qwen3.7-plus",
+  "result": {
+    "summary": "根据已校验观察形成结构化观看决定；中文方向由确定性渲染器生成。",
+    "observations": [],
+    "directions": [
+      {
+        "evidence_id": "direction_landscape_training_001_01",
+        "statement": "若在不改变机位的前提下让「右侧亮区」与「左侧暗部」的明暗分离在两种状态之间比较时，可比较明暗与色彩关系。",
+        "grounding": "依据 obs_landscape_training_001_01，可核对「右侧亮区」与「左侧暗部」及其可见关系。",
+        "tradeoff": "这一比较会保留「右侧亮区」，同时可能弱化「左侧暗部」；是否采用由拍摄者决定。"
+      }
+    ],
+    "direction_decision": {
+      "outcome": "options",
+      "options": [
+        {
+          "option_id": "direction_landscape_training_001_01",
+          "elements": [
+            {
+              "evidence_id": "obs_landscape_training_001_01",
+              "label": "右侧亮区"
+            },
+            {
+              "evidence_id": "obs_landscape_training_001_01",
+              "label": "左侧暗部"
+            }
+          ],
+          "strategy": "light_color",
+          "variable": "tonal_separation",
+          "change": "compare",
+          "preserve_element_labels": [
+            "右侧亮区"
+          ],
+          "weaken_element_labels": [
+            "左侧暗部"
+          ],
+          "position_freedom": "same_position"
+        }
+      ],
+      "no_options": null
+    },
+    "findings": [],
+    "candidates": []
+  },
+  "usage": {
+    "prompt_tokens": 1200,
+    "completion_tokens": 180,
+    "calls": 1,
+    "estimated_cost": 0.0021
+  },
+  "created_at": "2026-07-28T08:00:00Z",
+  "content_hash": "sha256:7777777777777777777777777777777777777777777777777777777777777777"
+}

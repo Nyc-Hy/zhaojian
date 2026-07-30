@@ -1,0 +1,1237 @@
+{
+  "schema_version": "1.0",
+  "ledger_id": "photography_skill_exposure_ledger_v1",
+  "created_at": "2026-07-29T10:27:00Z",
+  "dataset": {
+    "id": "photography-skill-v3",
+    "version": "3.0.0",
+    "content_hash": "sha256:887c338ab37c715e087822db8d73d7253485dbcc522f5126b573c57f31efb335"
+  },
+  "summary": {
+    "asset_count": 60,
+    "selected_exposed_count": 60,
+    "provider_exposed_count": 60,
+    "holdout_count": 12,
+    "holdout_exposed_count": 12,
+    "unseen_holdout_count": 0
+  },
+  "assets": [
+    {
+      "asset_id": "photo-v1-difficult-001",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Mount_Lushan_-_fog.JPG",
+      "content_hash": "sha256:4366f55b907dd4e23da02b3c46826ab332cf1bb5bc9309fff497edda6aff14dd",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_development12_v3_20260729_001",
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:36:25.065Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-difficult-002",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Trees_in_fog_on_the_northern_side_of_Loch_Tay,_Scottish_Highlands,_Scotland.jpg",
+      "content_hash": "sha256:6725eb1e272cdb0b62ddd4a0610944b73a89200eba10249b5b32efd5799662c9",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_development12_v3_20260729_001",
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:36:25.065Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-difficult-003",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Morning_fog_in_Upper_Silesia.jpg",
+      "content_hash": "sha256:b3e2ac4db911bfdf094ee5582506e01a243ade6bcff58791d4bbb46b830e0280",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_development12_v3_20260729_001",
+        "run_live_contract202_full60_v3_20260729_001",
+        "run_live_contract202_smoke3_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:33:24.405Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-difficult-004",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Man_at_Dundas_subway_station,_Toronto,_2008-05-06.jpg",
+      "content_hash": "sha256:71f30bd573e7902f8d1e99293a04c0b29a4fdc804f7ad2ec990d9540506343ba",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-difficult-005",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Viktorkirmes_auf_dem_Overbergplatz_--_2014_--_3738.jpg",
+      "content_hash": "sha256:f6bc9c030cd98e9898388c570bcb39e96500cca03b13aa473e3d1ff7e2a894af",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-difficult-006",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Folkloric_Tanoura_dance_performed_by_man.jpg",
+      "content_hash": "sha256:42a31676ecd05cfbcf05726eafe22191a5cffdc081ae3932b2675dce1d498711",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-difficult-007",
+      "dataset_split": "regression",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Low-key_photograph_of_light_bulb,_Straume,_Norway_julesvernex2.jpg",
+      "content_hash": "sha256:af15c527bde90ba42c3547488a716a89e3e40c7c25f719d71a65b03a5a6a6c85",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-difficult-008",
+      "dataset_split": "regression",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Low_Light_-_geograph.org.uk_-_2592063.jpg",
+      "content_hash": "sha256:c7fee8e630c3843034d2be4c62c6e90aeb66a87415d312d447d073829a0d86a4",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-001",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Wyspa_%C5%9Bw._Jerzego_w_Pera%C5%9Bcie_02.jpg",
+      "content_hash": "sha256:2ec0feda1fe6b81677a7c9b37c80bcf4a2104d358247d2b4b95816abab3ac1f5",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_development12_v3_20260729_001",
+        "run_live_contract202_full60_v3_20260729_001",
+        "run_live_contract202_smoke1_v3_20260729_001",
+        "run_live_contract202_smoke3_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:32:42.763Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-002",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Flamencos_andinos_(Phoenicoparrus_andinus),_Laguna_Hedionda,_Bolivia,_2016-02-03,_DD_61.JPG",
+      "content_hash": "sha256:a22dc0049d147e4832485da26abb86e4d9fc9379dac2b359abf59df9726a4173",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_development12_v3_20260729_001",
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:36:25.065Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-003",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Salineras_de_Maras,_Maras,_Per%C3%BA,_2015-07-30,_DD_12.JPG",
+      "content_hash": "sha256:773ee43a96af8149af7c09f401f707872cac921d88700abc23b0953cfcbd7266",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_development12_v3_20260729_001",
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:36:25.065Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-004",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Sillustani,_Per%C3%BA,_2015-08-01,_DD_108-112.JPG",
+      "content_hash": "sha256:c595ff8e5a69ab3c0b90dd86a2403f10a0d32183c1c028f7987f18822ac9c31f",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-005",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Laguna_de_Salinas,_Arequipa,_Per%C3%BA,_2015-08-02,_DD_16-19_PAN.JPG",
+      "content_hash": "sha256:770ba0442737abd41988078a7a1fd04e63c82ac68446b0c7357c66ae0e309c90",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-006",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:N%C3%B8rre_Vorup%C3%B8r_Coast_one_third_sky_2012-11-18.jpg",
+      "content_hash": "sha256:72344ca937636b9373a6c4919f76787044186f36e2a4959c99248b42c53a02ff",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-007",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Laguna_Hedionda,_Bolivia,_2016-02-03,_DD_51-54_PAN.JPG",
+      "content_hash": "sha256:51468f0016f9f4851dcdcbf71ca9789146d8b0f22cfa55e7fba5b750cfafb4f4",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-008",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Laguna_Honda,_Bolivia,_2016-02-03,_DD_34.JPG",
+      "content_hash": "sha256:4613dd0150533f90097809952b9b58ebd0d13330eef41385ec4a2321e7e0ea68",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-009",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Laguna_Honda,_Bolivia,_2016-02-03,_DD_42.JPG",
+      "content_hash": "sha256:7d10756fa3b345a39c8a37ce09dd5d9f32b144e5ef1242f6d32b667182123137",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-010",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Desierto_de_Dal%C3%AD,_Bolivia,_2016-02-02,_DD_107.JPG",
+      "content_hash": "sha256:0395a20159d330924c8e02662418cd76ffd93f1c8e258ba5240e88a57b4be27a",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-011",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Salineras_de_Maras,_Maras,_Per%C3%BA,_2015-07-30,_DD_03-07_PAN.JPG",
+      "content_hash": "sha256:7f62509a2bd92a9295db025e8815768b4e983f4d30f3a7150d188600eefc1281",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-012",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:G%C3%A9iseres_Sol_de_Ma%C3%B1ana,_Bolivia,_2016-02-02,_DD_56.JPG",
+      "content_hash": "sha256:90826046628b754ddec9cd0c58dc7f3fe73f48326fffe85dd2446f361c7ec999",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-013",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Fields_Hazy_Mountains_Marlimund_Ooty_Nilgiris_Aug25_A7CR_07258.jpg",
+      "content_hash": "sha256:2d2c238346c1d8a2dd8c520c0e5566e5e4676e447ce8ea0aba7b71f6ecd65979",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-014",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Bosque_de_Piedra,_provincia_de_Varna,_Bulgaria,_2016-05-27,_DD_73.jpg",
+      "content_hash": "sha256:52675e9d432c02b945026324ed212fb12b3b85a5001d5e2f1ac94955e86cf9cd",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-015",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Flamencos_andinos_(Phoenicoparrus_andinus),_Laguna_Ca%C3%B1apa,_Bolivia,_2016-02-03,_DD_63.JPG",
+      "content_hash": "sha256:ec41ea8fad361d03d542e1313482c4b47de208a85a0f11781dda426bd1bfe5b1",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-016",
+      "dataset_split": "regression",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Laguna_Verde,_Bolivia,_2016-02-02,_DD_79-82_PAN.JPG",
+      "content_hash": "sha256:c3b7b873566552309aa1412dcd58c1fcab41392b99e29fe4dd736b4598e9333d",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-017",
+      "dataset_split": "regression",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Tingh%C3%B8j_Hammersh%C3%B8j_Kvorning_2010-01-08_edit_filtered.jpg",
+      "content_hash": "sha256:2b314fb89363c953f76024998041a88c09bd0050a04d8f22e808c0211b98132a",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-018",
+      "dataset_split": "regression",
+      "source_url": "https://commons.wikimedia.org/wiki/File:%D0%A2%D0%B0%D1%80%D0%B0%D1%81%D1%96%D0%B2_%D0%BE%D0%B1%D1%80%D1%96%D0%B9._%D0%A1%D0%B2%D1%96%D1%82%D0%B0%D0%BD%D0%BE%D0%BA_(edited).jpg",
+      "content_hash": "sha256:46b71d4db796145e1df98bc09521094d4bc9de3493c3783a9d8da481d0e7c342",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-019",
+      "dataset_split": "regression",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Sunlight_through_clouds_and_view_of_Ginkaku-ji_Temple_from_above,_Kyoto,_Japan.jpg",
+      "content_hash": "sha256:9366db927e24d322b4637a5dd8cb02b36735d112705260ba7a98e9457a72c78b",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-landscape-020",
+      "dataset_split": "regression",
+      "source_url": "https://commons.wikimedia.org/wiki/File:2019_-_%D0%9D%D0%9F%D0%9F_%D0%9F%D0%BE%D0%B4%D1%96%D0%BB%D1%8C%D1%81%D1%8C%D0%BA%D1%96_%D0%A2%D0%BE%D0%B2%D1%82%D1%80%D0%B8_-_02.jpg",
+      "content_hash": "sha256:f9f2c7722e7eae9ec00e26f00cc210e7a629abd8c3851d70f5ce08fc305ecfeb",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-portrait-001",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Sparragus_pickers.jpg",
+      "content_hash": "sha256:28acc4e8d3ecf9b7a816140a661cc2837584ca031531e41ce75bec5f5006f4e2",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_development12_v3_20260729_001",
+        "run_live_contract202_full60_v3_20260729_001",
+        "run_live_contract202_smoke3_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:33:24.405Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-portrait-002",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Laguna_Mi%C3%B1iques,_Chile,_2016-02-08,_DD_39.JPG",
+      "content_hash": "sha256:a37e06d5ea059c3d3b643abf850c6a090ba4a041e5f5a19ac6f8a3d35e327c9a",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_development12_v3_20260729_001",
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:36:25.065Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-portrait-003",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Hellbrunn_grotto_of_ruins_during_renovation_2008.jpg",
+      "content_hash": "sha256:09c15917683ba07d7535e78a2a304f6257eb2baf796dcaf95d7255146ce00e20",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_development12_v3_20260729_001",
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:36:25.065Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-portrait-004",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Front_desk_of_the_Cau_Ferrat.jpg",
+      "content_hash": "sha256:4f252ea0a0d0c36d78952fe4e800db4230a3e6dbe6b29155ea66946a651c43b8",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-portrait-005",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Sugar_cane_mauritius_hg.jpg",
+      "content_hash": "sha256:77e0f486871c72728a44a301d95005357e5ce513794eff7f9f842e8ed9bdbed6",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-portrait-006",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Minor_offence.jpg",
+      "content_hash": "sha256:1323ace533e52f87438adf8c8d61a7d8a59401419adaf5dda2001fde33772d93",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-portrait-007",
+      "dataset_split": "regression",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Tradisonal_panen.jpg",
+      "content_hash": "sha256:912d7f641378b6997cf186d7ac61cf3db2dac1f3f82dc4bb7ce989de55f464f7",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-portrait-008",
+      "dataset_split": "regression",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Ice_core_drill.jpg",
+      "content_hash": "sha256:fc7fa4719abe0f8926022874a628d7e1163d7215a1412d3d5bd7958087339e4f",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-urban-001",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Wooden_and_bamboo_facades_of_dwellings_with_sudare_in_a_cobbled_street_of_Gion,_perspective_effect_with_vanishing_point,_Kyoto,_Japan.jpg",
+      "content_hash": "sha256:2804e99fe84814902f42cf082179ee76f862aed3798da964952252d9daf01d66",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_development12_v3_20260729_001",
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:36:25.065Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-urban-002",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Traditional_hanok_house_with_wooden_doors_along_a_steeply_sloping_street_in_Bukchon_Hanok_Village_Seoul.jpg",
+      "content_hash": "sha256:3f1e6df70a791177b6434e1e1504b060d0fa19f10cadf889e75be1c54fbf9540",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_development12_v3_20260729_001",
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:36:25.065Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-urban-003",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Al_Sa%27a_Square_(DSC03620).jpg",
+      "content_hash": "sha256:532a2977e758d17b5236cbad4127343878e73300d0b1b50a162b5b6ad6623092",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_development12_v3_20260729_001",
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:36:25.065Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-urban-004",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Lille_rue_claude_bernard.jpg",
+      "content_hash": "sha256:e8828f3a12ebe94096a4c9c0bf1c8f82eb2eed289c74c11384aec5f744b14f83",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-urban-005",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Avenida_de_la_Uni%C3%B3n,_Bucarest,_Ruman%C3%ADa,_2016-05-29,_DD_57.jpg",
+      "content_hash": "sha256:1e7520cbb96cf04c6d473560937bf7492e18a7f1bfa6ec0b405cccb5afffc6d9",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-urban-006",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:2016_Rangun,_Ulica_Maha_Bandula_widziana_z_Pagody_Sule_(03).jpg",
+      "content_hash": "sha256:d9efe3b8482000c72f10121bcda9c723662b524b88174ee3f7d9e0f87ee248df",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-urban-007",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Sam_Nujoma_Ave,_Swakopmund,_Namibia,_2018-08-04,_DD_56.jpg",
+      "content_hash": "sha256:0d7061807f113e407b4e9ed481adc5cc056a75b6c820f4bb858725a34bb29aa4",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-urban-008",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Lille_rue_Saint_Albin.jpg",
+      "content_hash": "sha256:3e97ea6681b3d7ae7d38dc3717e395aa4aa68676fd0951127318c77ea5108642",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-urban-009",
+      "dataset_split": "training",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Marcq_bd_clemenceau.jpg",
+      "content_hash": "sha256:aefaa90700634481ba0b74588d49be93d94a0ab2b77e22e3c1976255981d272a",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-urban-010",
+      "dataset_split": "regression",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Calle_de_San_Jos%C3%A9,_San_Juli%C3%A1n,_isla_de_Malta,_Malta,_2021-08-25,_DD_13.jpg",
+      "content_hash": "sha256:417a04f5a4d005e7333b2bac3096600a05fe714a91aea5f529b51b6725b0c04c",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-urban-011",
+      "dataset_split": "regression",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Negombo,_Greens_Road,_2025-07_CN-02.jpg",
+      "content_hash": "sha256:f7da68f2568aaa271ed9fd31107875c54b1a0099b747918432643ca20ee50701",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v1-urban-012",
+      "dataset_split": "regression",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Kopenhagen_(DK),_Nyhavn_--_2017_--_1707.jpg",
+      "content_hash": "sha256:546a01f258570d10fe5c57f933db5f50ba7e8f27154e293819a251dd4da6ec12",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v3-difficult-001",
+      "dataset_split": "holdout",
+      "source_url": "https://commons.wikimedia.org/wiki/File:San_francisco_in_fog_with_rays.jpg",
+      "content_hash": "sha256:8ce0fd67aeb2c19efdafff4bd0c1fe0869271f6550989c804a12c2c4635991c3",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v3-difficult-002",
+      "dataset_split": "holdout",
+      "source_url": "https://commons.wikimedia.org/wiki/File:500px_photo_(201681449).jpeg",
+      "content_hash": "sha256:24e94ad4df4cb0be7b164adff432298c823fe9cd2e5c1d879f63afefb370c1dc",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v3-landscape-001",
+      "dataset_split": "holdout",
+      "source_url": "https://commons.wikimedia.org/wiki/File:%D0%97%D0%B0%D1%85%D1%96%D0%B4_%D1%81%D0%BE%D0%BD%D1%86%D1%8F_%D0%BD%D0%B0_%D0%B2%D0%B5%D1%80%D1%88%D0%B8%D0%BD%D1%96_%D1%81%D0%BA%D0%B5%D0%BB%D1%96_%D0%A1%D0%BE%D0%BA%D0%BE%D0%BB%D0%B8%D0%BD%D0%B5_%D0%9E%D0%BA%D0%BE.jpg",
+      "content_hash": "sha256:d9e40e727ce0f1f0af89e8b48d4b61ba18abe6195a89297d06452a3353e9ed54",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v3-landscape-002",
+      "dataset_split": "holdout",
+      "source_url": "https://commons.wikimedia.org/wiki/File:%D0%A1%D0%BA%D0%B5%D0%BB%D1%96_%D0%94%D0%B5%D0%BC%D0%B5%D1%80%D0%B4%D0%B6%D1%96.jpg",
+      "content_hash": "sha256:f5550e8f69541d3d5fd5d4c9ee0aacf7b7577985c7b297a4054f7cf8e79621d2",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v3-landscape-003",
+      "dataset_split": "holdout",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Amphitheatre_Bay_after_a_storm,_Akamas_Peninsula,_Cyprus.jpg",
+      "content_hash": "sha256:256dfbecf2d61b312c4248395320397620a4947a28078f92ce498a181dc32b56",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v3-landscape-004",
+      "dataset_split": "holdout",
+      "source_url": "https://commons.wikimedia.org/wiki/File:21-224-5054_NNP_Synevyr_RB_18.jpg",
+      "content_hash": "sha256:ffdd4e4f7238ac05a00e30fefe63bcb7f2cdb58505962db843c99dd848b7e65f",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v3-landscape-005",
+      "dataset_split": "holdout",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Amanhecer_no_Hercules_--.jpg",
+      "content_hash": "sha256:31f8cf3b0809ef896a4f112b817dda1ac7c58944778f8f803d64c089dfd92097",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v3-portrait-001",
+      "dataset_split": "holdout",
+      "source_url": "https://commons.wikimedia.org/wiki/File:%C3%96lNf1926_%C3%85kerby_-_KMB_-_16000300014055.jpg",
+      "content_hash": "sha256:b558a1e16a8652cb718f65aca0381579a764a35a04ace731cac887919c7e9bca",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v3-portrait-002",
+      "dataset_split": "holdout",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Harvest_rice_in_the_traditional_way.jpg",
+      "content_hash": "sha256:b8200193751e6c84054622012f07e0e94f1d9951bca6507dd7ea700c57aecec1",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v3-urban-001",
+      "dataset_split": "holdout",
+      "source_url": "https://commons.wikimedia.org/wiki/File:%D0%92%D0%B8%D0%B4%D1%8B_%D0%9E%D1%83%D0%BB%D1%83_(5-7.06.2026)_15.jpg",
+      "content_hash": "sha256:5f9ca97c217bb3babeb868cf0b36b724d306dd56a434b24866424ff22825f4d1",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v3-urban-002",
+      "dataset_split": "holdout",
+      "source_url": "https://commons.wikimedia.org/wiki/File:South_Bridge_Road,_Singapore,_20240122_0832_2926.jpg",
+      "content_hash": "sha256:b26e8b7e100da6c9d73039c45b214f1d71720d058fd18672378c6713ef2005ef",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    },
+    {
+      "asset_id": "photo-v3-urban-003",
+      "dataset_split": "holdout",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Breda_Sint_Janstraat_zicht_op_de_Grote_Markt_2024-09-20.jpg",
+      "content_hash": "sha256:b7008f15aef60b7ec66046801ac6735740dc0b1cd985b0bae4847c31e8fafa2b",
+      "selected_exposed": true,
+      "provider_exposed": true,
+      "live_completed": true,
+      "mock_seen": false,
+      "potential_iteration_influence": true,
+      "run_ids": [
+        "run_live_contract202_full60_v3_20260729_001"
+      ],
+      "prompt_versions": [
+        "2.0.2"
+      ],
+      "first_seen_at": "2026-07-29T09:43:50.513Z",
+      "last_seen_at": "2026-07-29T10:18:21.101Z",
+      "unseen_eligible": false
+    }
+  ],
+  "content_hash": "sha256:be99a8ab93a3ea85f18ffdbd7e6e0d362e78cc94e47331283ce080f2492e1fee"
+}

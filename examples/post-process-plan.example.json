@@ -1,0 +1,52 @@
+{
+  "schema_version": "0.1",
+  "contract_status": "draft",
+  "plan_id": "post_process_plan_001",
+  "creative_intent_id": "creative_intent_001",
+  "source_observation_id": "final_observation_001",
+  "alternatives": [
+    {
+      "id": "preserve_depth",
+      "intent": "让湖面亮区继续连接近景与远山，同时保留树枝作为空间边缘。",
+      "target_regions": [
+        "湖面中部亮区",
+        "近处树枝与山脊交叠区域"
+      ],
+      "rationale": "这两个区域共同承担当前创作意图中的注意路径和空间层次。",
+      "expected_changes": [
+        "湖面亮区内部纹理更容易辨认。",
+        "树枝仍然可见，但不会完全压住远处山脊。"
+      ],
+      "tradeoffs": [
+        "降低树枝存在感可能削弱近景框架。",
+        "保留亮区纹理可能减少整体明暗反差。"
+      ],
+      "reversible": true,
+      "uncertainties": [
+        "需要查看原始文件确认亮区是否仍有可恢复纹理。"
+      ]
+    },
+    {
+      "id": "quiet_lake",
+      "intent": "减少前景树枝的吸引力，让注意更快落到湖面和山脊。",
+      "target_regions": [
+        "近处树枝",
+        "湖面与山脊连接区域"
+      ],
+      "rationale": "这一方向保留原有层次，但改变注意首先落下的位置。",
+      "expected_changes": [
+        "观看起点从树枝转向湖面亮区。",
+        "山脊轮廓的连续性更明显。"
+      ],
+      "tradeoffs": [
+        "近景存在感降低后，空间纵深可能变得更平。",
+        "画面会减少一部分现场临近感。"
+      ],
+      "reversible": true,
+      "uncertainties": [
+        "树枝是否应继续承担取景边缘，需要由摄影者比较两种预览后选择。"
+      ]
+    }
+  ],
+  "created_at": "2026-07-24T08:12:00Z"
+}

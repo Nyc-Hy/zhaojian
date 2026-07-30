@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/skill-training-splits.schema.json",
+  "title": "照见 Skill 训练数据固定分区",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "dataset_version",
+    "frozen",
+    "frozen_at",
+    "content_hash",
+    "partitions"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "dataset_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 80
+    },
+    "dataset_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$",
+      "maxLength": 64
+    },
+    "frozen": { "const": true },
+    "frozen_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "partitions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["training", "regression", "holdout"],
+      "properties": {
+        "training": { "$ref": "#/$defs/assetIds" },
+        "regression": { "$ref": "#/$defs/assetIds" },
+        "holdout": { "$ref": "#/$defs/assetIds" }
+      }
+    }
+  },
+  "$defs": {
+    "assetIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_-]{2,79}$"
+      }
+    }
+  }
+}

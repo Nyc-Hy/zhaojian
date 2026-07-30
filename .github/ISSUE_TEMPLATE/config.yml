@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 私密安全报告
+    url: https://github.com/Nyc-Hy/zhaojian/security/advisories/new
+    about: 请通过 Private Vulnerability Reporting 提交未公开漏洞或隐私问题。

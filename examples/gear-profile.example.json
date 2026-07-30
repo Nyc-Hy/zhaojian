@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "id": "kit_travel_001",
+  "name": "旅行摄影包",
+  "camera": {
+    "manufacturer": "示例品牌",
+    "model": "全画幅机身",
+    "sensor": {
+      "width_mm": 35.9,
+      "height_mm": 23.9,
+      "crop_factor": 1.0
+    },
+    "iso": {
+      "base": 100,
+      "min": 100,
+      "max": 204800
+    },
+    "shutter": {
+      "shortest_seconds": 0.000125,
+      "longest_seconds": 30
+    },
+    "ibis_stops": 5
+  },
+  "lenses": [
+    {
+      "id": "lens_24_70_f4",
+      "manufacturer": "示例品牌",
+      "model": "24-70mm F4",
+      "type": "zoom",
+      "focal_length_mm": {
+        "min": 24,
+        "max": 70
+      },
+      "maximum_aperture": {
+        "wide": 4,
+        "tele": 4
+      },
+      "minimum_aperture": 22,
+      "stabilization_stops": 0,
+      "minimum_focus_distance_m": 0.3
+    }
+  ],
+  "accessories": {
+    "tripod": true,
+    "monopod": false,
+    "cpl": true,
+    "remote_release": false,
+    "nd_stops": [3, 6]
+  },
+  "preferences": {
+    "max_auto_iso": 1600,
+    "capture_format": "raw+jpeg",
+    "handheld_stability": "conservative",
+    "default_priority": "image_quality",
+    "notes": "旅行时愿意使用小型三脚架。"
+  }
+}

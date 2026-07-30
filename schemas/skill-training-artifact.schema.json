@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/skill-training-artifact.schema.json",
+  "title": "照见 Skill 训练样例制品",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_id",
+    "run_id",
+    "asset_id",
+    "dataset_split",
+    "label_origin",
+    "mock_only",
+    "eligible_for_training",
+    "role_artifacts",
+    "findings",
+    "model_disagreement",
+    "outcome",
+    "skill_improvement_candidates",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "artifact_id": { "$ref": "#/$defs/identifier" },
+    "run_id": { "$ref": "#/$defs/identifier" },
+    "asset_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{2,79}$"
+    },
+    "dataset_split": { "enum": ["training", "regression", "holdout"] },
+    "label_origin": { "const": "model_suggested" },
+    "mock_only": { "type": "boolean" },
+    "eligible_for_training": { "type": "boolean" },
+    "role_artifacts": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/roleArtifact" }
+    },
+    "findings": {
+      "type": "array",
+      "maxItems": 32,
+      "items": { "$ref": "#/$defs/finding" }
+    },
+    "model_disagreement": { "type": "boolean" },
+    "outcome": { "enum": ["accepted", "quarantined", "failed"] },
+    "skill_improvement_candidates": {
+      "type": "array",
+      "maxItems": 16,
+      "items": { "$ref": "#/$defs/improvementCandidate" }
+    },
+    "content_hash": { "$ref": "#/$defs/contentHash" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "mock_only": { "const": true } } },
+      "then": {
+        "properties": {
+          "eligible_for_training": { "const": false }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "dataset_split": { "enum": ["regression", "holdout"] }
+        }
+      },
+      "then": {
+        "properties": {
+          "eligible_for_training": { "const": false },
+          "skill_improvement_candidates": { "type": "array", "maxItems": 0 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
+    },
+    "contentHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "role": {
+      "type": "string",
+      "enum": ["observer", "direction_generator", "critic", "red_team", "curator"]
+    },
+    "roleArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "output_hash", "validation_status", "evidence_ids"],
+      "properties": {
+        "role": { "$ref": "#/$defs/role" },
+        "output_hash": { "$ref": "#/$defs/contentHash" },
+        "validation_status": { "enum": ["passed", "failed", "skipped"] },
+        "evidence_ids": {
+          "type": "array",
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
+          }
+        }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "evidence", "role", "severity", "validation_status"],
+      "properties": {
+        "code": { "type": "string", "pattern": "^[a-z][a-z0-9_]{2,79}$" },
+        "evidence": { "type": "string", "minLength": 3, "maxLength": 300 },
+        "role": { "enum": ["critic", "red_team", "deterministic_gate"] },
+        "severity": { "enum": ["info", "warning", "blocking"] },
+        "validation_status": {
+          "enum": ["model_suggested", "confirmed_by_gate", "disputed", "quarantined"]
+        }
+      }
+    },
+    "improvementCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["skill_id", "artifact_type", "summary", "evidence_ids"],
+      "properties": {
+        "skill_id": { "enum": ["observe-scene", "composition-relations"] },
+        "artifact_type": {
+          "enum": ["instruction", "reference", "example", "negative_example", "validator"]
+        },
+        "summary": { "type": "string", "minLength": 8, "maxLength": 300 },
+        "evidence_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/skill-training-dataset.schema.json",
+  "title": "照见 Skill 训练数据清单",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "dataset_version",
+    "description",
+    "created_at",
+    "content_hash",
+    "split_counts",
+    "assets"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.1" },
+    "dataset_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 80
+    },
+    "dataset_version": { "$ref": "#/$defs/semanticVersion" },
+    "description": { "type": "string", "minLength": 8, "maxLength": 240 },
+    "created_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    },
+    "content_hash": { "$ref": "#/$defs/contentHash" },
+    "split_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["training", "regression", "holdout", "total"],
+      "properties": {
+        "training": { "type": "integer", "minimum": 1 },
+        "regression": { "type": "integer", "minimum": 1 },
+        "holdout": { "type": "integer", "minimum": 1 },
+        "total": { "type": "integer", "minimum": 3 }
+      }
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/asset" }
+    }
+  },
+  "$defs": {
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$",
+      "maxLength": 64
+    },
+    "contentHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "asset_id",
+        "source_url",
+        "download_url",
+        "author",
+        "license",
+        "license_url",
+        "source_kind",
+        "allowed_usage",
+        "attribution",
+        "source_file_sha1",
+        "content_hash",
+        "downloaded_at",
+        "rights_verified_at",
+        "portrait_or_personal_data",
+        "privacy_review",
+        "derivative_path",
+        "dataset_split",
+        "category",
+        "status"
+      ],
+      "properties": {
+        "asset_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{2,79}$"
+        },
+        "source_url": { "type": "string", "pattern": "^https://[^\\s]+$", "maxLength": 2000 },
+        "download_url": { "type": "string", "pattern": "^https://[^\\s]+$", "maxLength": 2000 },
+        "author": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "license": {
+          "type": "string",
+          "enum": [
+            "Owned",
+            "Explicit permission",
+            "Public domain",
+            "CC0 1.0",
+            "CC BY 2.0",
+            "CC BY 2.5",
+            "CC BY 3.0",
+            "CC BY 4.0",
+            "CC BY-SA 2.0",
+            "CC BY-SA 2.5",
+            "CC BY-SA 3.0",
+            "CC BY-SA 4.0"
+          ]
+        },
+        "license_url": { "type": "string", "pattern": "^https://[^\\s]+$", "maxLength": 2000 },
+        "source_kind": {
+          "type": "string",
+          "enum": ["owned", "explicit_permission", "public_domain", "open_license"]
+        },
+        "allowed_usage": {
+          "type": "string",
+          "enum": ["training", "evaluation", "training_and_evaluation"]
+        },
+        "attribution": { "type": "string", "minLength": 1, "maxLength": 1000 },
+        "source_file_sha1": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "content_hash": { "$ref": "#/$defs/contentHash" },
+        "downloaded_at": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+        },
+        "rights_verified_at": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+        },
+        "portrait_or_personal_data": {
+          "type": "string",
+          "enum": ["none", "person_visible", "potential_sensitive"]
+        },
+        "privacy_review": {
+          "type": "string",
+          "enum": ["not_applicable", "public_context_only", "quarantined"]
+        },
+        "derivative_path": {
+          "type": "string",
+          "pattern": "^\\.assets/[a-z][a-z0-9_-]{2,79}\\.jpg$",
+          "maxLength": 100
+        },
+        "dataset_split": {
+          "type": "string",
+          "enum": ["training", "regression", "holdout"]
+        },
+        "category": {
+          "type": "string",
+          "enum": ["landscape_nature", "urban_everyday", "environmental_portrait", "ordinary_difficult"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["approved", "quarantined", "retired"]
+        }
+      }
+    }
+  }
+}

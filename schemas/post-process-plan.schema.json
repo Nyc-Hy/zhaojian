@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/post-process-plan.schema.json",
+  "title": "照见后期思路草案",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_status",
+    "plan_id",
+    "creative_intent_id",
+    "source_observation_id",
+    "alternatives",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "contract_status": { "const": "draft" },
+    "plan_id": { "$ref": "#/$defs/identifier" },
+    "creative_intent_id": { "$ref": "#/$defs/identifier" },
+    "source_observation_id": { "$ref": "#/$defs/identifier" },
+    "alternatives": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/alternative" }
+    },
+    "created_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 400
+    },
+    "alternative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "intent",
+        "target_regions",
+        "rationale",
+        "expected_changes",
+        "tradeoffs",
+        "reversible",
+        "uncertainties"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/identifier" },
+        "intent": { "$ref": "#/$defs/text" },
+        "target_regions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": { "$ref": "#/$defs/text" }
+        },
+        "rationale": { "$ref": "#/$defs/text" },
+        "expected_changes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": { "$ref": "#/$defs/text" }
+        },
+        "tradeoffs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": { "$ref": "#/$defs/text" }
+        },
+        "reversible": { "const": true },
+        "uncertainties": {
+          "type": "array",
+          "maxItems": 8,
+          "items": { "$ref": "#/$defs/text" }
+        }
+      }
+    }
+  }
+}

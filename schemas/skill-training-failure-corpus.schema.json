@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/skill-training-failure-corpus.schema.json",
+  "title": "照见 Skill 训练历史失败语料库",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "corpus_id",
+    "created_at",
+    "source_root",
+    "record_count",
+    "records",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "corpus_id": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{2,79}$" },
+    "created_at": { "$ref": "#/$defs/timestamp" },
+    "source_root": { "const": ".local/skill-training" },
+    "record_count": { "type": "integer", "minimum": 1, "maximum": 10000 },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10000,
+      "items": { "$ref": "#/$defs/failureRecord" }
+    },
+    "content_hash": { "$ref": "#/$defs/contentHash" }
+  },
+  "$defs": {
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    },
+    "contentHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "failureRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "failure_id",
+        "run_id",
+        "report_id",
+        "report_content_hash",
+        "failure_fingerprint",
+        "asset_id",
+        "dataset_split",
+        "mode",
+        "role",
+        "provider",
+        "model",
+        "prompt_version",
+        "schema_version",
+        "failure_code",
+        "category",
+        "safe_summary",
+        "repair_reason_code",
+        "retryable",
+        "validation_status",
+        "observed_at"
+      ],
+      "properties": {
+        "failure_id": { "type": "string", "pattern": "^failure_[a-f0-9]{24}$" },
+        "run_id": { "type": "string", "minLength": 3, "maxLength": 128 },
+        "report_id": { "type": "string", "minLength": 3, "maxLength": 128 },
+        "report_content_hash": { "$ref": "#/$defs/contentHash" },
+        "failure_fingerprint": { "$ref": "#/$defs/contentHash" },
+        "asset_id": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{2,79}$" },
+        "dataset_split": { "enum": ["training", "regression", "holdout", "unknown"] },
+        "mode": { "enum": ["mock", "live"] },
+        "role": {
+          "enum": [
+            "observer",
+            "direction_generator",
+            "critic",
+            "red_team",
+            "curator",
+            "deterministic_gate"
+          ]
+        },
+        "provider": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "model": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "prompt_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+        },
+        "schema_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+        },
+        "failure_code": { "type": "string", "minLength": 3, "maxLength": 80 },
+        "category": {
+          "enum": [
+            "observer_inference",
+            "direction_contract",
+            "aesthetic_judgment",
+            "unsupported_grounding",
+            "prescriptive_direction",
+            "role_schema",
+            "provider_transient",
+            "safety_finding",
+            "training_pipeline",
+            "low_confidence",
+            "model_disagreement",
+            "prompt_injection",
+            "other"
+          ]
+        },
+        "safe_summary": { "type": "string", "minLength": 3, "maxLength": 120 },
+        "repair_reason_code": {
+          "enum": [
+            "schema_invalid",
+            "observer_contract_invalid",
+            "direction_contract_invalid",
+            "all_direction_options_excluded",
+            "sensitive_output",
+            "upstream_transient",
+            "timeout",
+            "usage_invalid",
+            "unknown_failure",
+            "not_retryable"
+          ]
+        },
+        "retryable": { "type": ["boolean", "null"] },
+        "validation_status": {
+          "enum": ["model_suggested", "confirmed_by_gate", "disputed", "quarantined"]
+        },
+        "observed_at": { "$ref": "#/$defs/timestamp" }
+      }
+    }
+  }
+}

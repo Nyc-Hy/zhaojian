@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "artifact_id": "artifact_contract_fixture_001",
+  "run_id": "run_contract_fixture_001",
+  "asset_id": "landscape_training_001",
+  "dataset_split": "training",
+  "label_origin": "model_suggested",
+  "mock_only": true,
+  "eligible_for_training": false,
+  "role_artifacts": [
+    {
+      "role": "observer",
+      "output_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "validation_status": "passed",
+      "evidence_ids": ["mock_landscape_training_001_observer"]
+    },
+    {
+      "role": "direction_generator",
+      "output_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "validation_status": "passed",
+      "evidence_ids": ["mock_landscape_training_001_direction"]
+    },
+    {
+      "role": "critic",
+      "output_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "validation_status": "passed",
+      "evidence_ids": ["mock_landscape_training_001_critic"]
+    },
+    {
+      "role": "red_team",
+      "output_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "validation_status": "passed",
+      "evidence_ids": ["mock_landscape_training_001_red_team"]
+    },
+    {
+      "role": "curator",
+      "output_hash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "validation_status": "passed",
+      "evidence_ids": ["mock_landscape_training_001_curator"]
+    }
+  ],
+  "findings": [],
+  "model_disagreement": false,
+  "outcome": "accepted",
+  "skill_improvement_candidates": [
+    {
+      "skill_id": "observe-scene",
+      "artifact_type": "example",
+      "summary": "仅验证整理流程的 Mock 候选，不包含真实照片观察，也不能进入正式训练。",
+      "evidence_ids": ["mock_landscape_training_001_observer"]
+    }
+  ],
+  "content_hash": "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+}

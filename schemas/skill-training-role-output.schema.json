@@ -1,0 +1,330 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/skill-training-role-output.schema.json",
+  "title": "照见 Skill 训练角色结构化输出",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "asset_id",
+    "role",
+    "attempt",
+    "provider",
+    "model",
+    "result",
+    "usage",
+    "created_at",
+    "content_hash"
+  ],
+  "properties": {
+    "schema_version": { "enum": ["1.0", "2.0"] },
+    "run_id": { "$ref": "#/$defs/identifier" },
+    "asset_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{2,79}$"
+    },
+    "role": { "$ref": "#/$defs/role" },
+    "attempt": { "type": "integer", "minimum": 1, "maximum": 5 },
+    "provider": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "model": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "result": { "$ref": "#/$defs/result" },
+    "usage": { "$ref": "#/$defs/usage" },
+    "created_at": { "$ref": "#/$defs/timestamp" },
+    "content_hash": { "$ref": "#/$defs/contentHash" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "schema_version": { "const": "2.0" },
+          "role": { "const": "direction_generator" }
+        },
+        "required": ["schema_version", "role"]
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "type": "object",
+            "required": ["direction_decision"],
+            "properties": {
+              "direction_decision": { "$ref": "#/$defs/directionDecision" }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    },
+    "contentHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "role": {
+      "type": "string",
+      "enum": ["observer", "direction_generator", "critic", "red_team", "curator"]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "evidenceId": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,127}$"
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "statement", "confidence", "uncertainty"],
+      "properties": {
+        "evidence_id": { "$ref": "#/$defs/evidenceId" },
+        "statement": { "type": "string", "minLength": 3, "maxLength": 300 },
+        "confidence": { "$ref": "#/$defs/confidence" },
+        "uncertainty": { "type": ["string", "null"], "minLength": 3, "maxLength": 240 }
+      }
+    },
+    "direction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "statement", "grounding", "tradeoff"],
+      "properties": {
+        "evidence_id": { "$ref": "#/$defs/evidenceId" },
+        "statement": { "type": "string", "minLength": 3, "maxLength": 300 },
+        "grounding": { "type": "string", "minLength": 3, "maxLength": 300 },
+        "tradeoff": { "type": "string", "minLength": 3, "maxLength": 300 }
+      }
+    },
+    "directionLabel": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40,
+      "pattern": "^[^\\s。！？；：\\r\\n{}<>](?:[^。！？；：\\r\\n{}<>]*[^\\s。！？；：\\r\\n{}<>])?$",
+      "not": {
+        "pattern": "(?:必须|应该|最佳|构图错误|审美价值|宁静|辽阔|戏剧性|电影感|故事感|叙事性|压迫感|生命力|三分法|黄金分割|九宫格|视觉中心|焦段|光圈|快门|[Ii][Ss][Oo]|[Nn][Dd]|白平衡|[Rr][Aa][Ww]|直方图|对焦|后期参数)"
+      }
+    },
+    "directionElement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "label"],
+      "properties": {
+        "evidence_id": { "$ref": "#/$defs/evidenceId" },
+        "label": { "$ref": "#/$defs/directionLabel" }
+      }
+    },
+    "structuredDirectionOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "option_id",
+        "elements",
+        "strategy",
+        "variable",
+        "change",
+        "preserve_element_labels",
+        "weaken_element_labels",
+        "position_freedom"
+      ],
+      "properties": {
+        "option_id": { "$ref": "#/$defs/evidenceId" },
+        "elements": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": { "$ref": "#/$defs/directionElement" }
+        },
+        "strategy": {
+          "enum": [
+            "depth_occlusion",
+            "scale_context",
+            "rhythm_line",
+            "light_color",
+            "negative_space",
+            "frame_edge"
+          ]
+        },
+        "variable": {
+          "enum": [
+            "overlap_amount",
+            "element_spacing",
+            "relative_area",
+            "repetition_interval",
+            "direction_continuity",
+            "tonal_separation",
+            "color_separation",
+            "frame_edge_distance",
+            "depth_separation"
+          ]
+        },
+        "change": { "enum": ["increase", "decrease", "preserve", "compare"] },
+        "preserve_element_labels": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/directionLabel" }
+        },
+        "weaken_element_labels": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/directionLabel" }
+        },
+        "position_freedom": {
+          "enum": ["same_position", "small_change_possible", "unknown"]
+        }
+      }
+    },
+    "directionNoOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason_code", "checked_evidence_ids"],
+      "properties": {
+        "reason_code": {
+          "enum": [
+            "insufficient_grounded_evidence",
+            "insufficient_distinct_relationships",
+            "only_unsafe_or_formulaic_options",
+            "position_freedom_unknown"
+          ]
+        },
+        "checked_evidence_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/evidenceId" }
+        }
+      }
+    },
+    "directionDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outcome", "options", "no_options"],
+      "properties": {
+        "outcome": { "enum": ["options", "no_options"] },
+        "options": {
+          "type": "array",
+          "maxItems": 3,
+          "items": { "$ref": "#/$defs/structuredDirectionOption" }
+        },
+        "no_options": {
+          "anyOf": [
+            { "$ref": "#/$defs/directionNoOptions" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "outcome": { "const": "options" } },
+            "required": ["outcome"]
+          },
+          "then": {
+            "properties": {
+              "options": { "type": "array", "minItems": 1 },
+              "no_options": { "type": "null" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "outcome": { "const": "no_options" } },
+            "required": ["outcome"]
+          },
+          "then": {
+            "properties": {
+              "options": { "type": "array", "maxItems": 0 },
+              "no_options": { "$ref": "#/$defs/directionNoOptions" }
+            }
+          }
+        }
+      ]
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "evidence", "severity", "validation_status"],
+      "properties": {
+        "code": { "type": "string", "pattern": "^[a-z][a-z0-9_]{2,79}$" },
+        "evidence": { "type": "string", "minLength": 3, "maxLength": 300 },
+        "severity": { "enum": ["info", "warning", "blocking"] },
+        "validation_status": { "enum": ["model_suggested", "disputed"] }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["skill_id", "artifact_type", "summary", "evidence_ids"],
+      "properties": {
+        "skill_id": { "enum": ["observe-scene", "composition-relations"] },
+        "artifact_type": {
+          "enum": ["instruction", "reference", "example", "negative_example", "validator"]
+        },
+        "summary": { "type": "string", "minLength": 3, "maxLength": 300 },
+        "evidence_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/evidenceId" }
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary", "observations", "directions", "findings", "candidates"],
+      "properties": {
+        "summary": { "type": "string", "minLength": 3, "maxLength": 600 },
+        "observations": {
+          "type": "array",
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/observation" }
+        },
+        "directions": {
+          "type": "array",
+          "maxItems": 8,
+          "items": { "$ref": "#/$defs/direction" }
+        },
+        "direction_decision": {
+          "anyOf": [
+            { "$ref": "#/$defs/directionDecision" },
+            { "type": "null" }
+          ]
+        },
+        "findings": {
+          "type": "array",
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/finding" }
+        },
+        "candidates": {
+          "type": "array",
+          "maxItems": 8,
+          "items": { "$ref": "#/$defs/candidate" }
+        }
+      }
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prompt_tokens", "completion_tokens", "calls", "estimated_cost"],
+      "properties": {
+        "prompt_tokens": { "type": "integer", "minimum": 0 },
+        "completion_tokens": { "type": "integer", "minimum": 0 },
+        "calls": { "const": 1 },
+        "estimated_cost": { "type": "number", "minimum": 0, "maximum": 1000000 }
+      }
+    }
+  }
+}

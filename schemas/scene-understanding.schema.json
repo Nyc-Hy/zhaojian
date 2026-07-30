@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zhaojian.app/schemas/scene-understanding.schema.json",
+  "title": "照见画面理解",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "request_id", "language", "observations", "technical_observations"],
+  "properties": {
+    "schema_version": { "const": "1.1" },
+    "request_id": { "type": "string", "minLength": 8, "maxLength": 128 },
+    "language": { "const": "zh-CN" },
+    "observations": { "$ref": "#/$defs/observations" },
+    "technical_observations": { "$ref": "#/$defs/technicalObservations" }
+  },
+  "$defs": {
+    "bbox": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "prefixItems": [
+        { "type": "number", "minimum": 0, "maximum": 1 },
+        { "type": "number", "minimum": 0, "maximum": 1 },
+        { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+        { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+      ],
+      "items": false
+    },
+    "attentionCandidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "evidence", "confidence"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "evidence": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "region": { "$ref": "#/$defs/bbox" }
+      }
+    },
+    "visualRelation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["elements", "relation", "evidence", "confidence"],
+      "properties": {
+        "elements": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+        },
+        "relation": {
+          "type": "string",
+          "enum": ["overlap", "separation", "continuation", "repetition", "directional_contrast", "scale_contrast", "tonal_contrast", "color_contrast", "frame_tension", "depth_layering"]
+        },
+        "evidence": { "type": "string", "minLength": 4, "maxLength": 220 },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "observations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary", "attention_candidates", "visual_relations", "spatial_layers", "light", "uncertainties", "factual_confidence"],
+      "properties": {
+        "summary": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "attention_candidates": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": { "$ref": "#/$defs/attentionCandidate" }
+        },
+        "visual_relations": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": { "$ref": "#/$defs/visualRelation" }
+        },
+        "spatial_layers": {
+          "type": "array",
+          "maxItems": 6,
+          "items": { "type": "string", "minLength": 1, "maxLength": 100 }
+        },
+        "light": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["direction", "contrast", "highlight_risk"],
+          "properties": {
+            "direction": { "type": "string", "enum": ["front", "side", "back", "top", "diffuse", "mixed", "unknown"] },
+            "contrast": { "type": "string", "enum": ["low", "medium", "high", "unknown"] },
+            "highlight_risk": { "type": "string", "enum": ["low", "medium", "high", "unknown"] }
+          }
+        },
+        "uncertainties": {
+          "type": "array",
+          "maxItems": 8,
+          "items": { "type": "string", "minLength": 1, "maxLength": 180 }
+        },
+        "factual_confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "technicalObservations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["motion", "dynamic_range", "light_change", "confidence"],
+      "properties": {
+        "motion": { "type": "string", "enum": ["static", "subtle", "significant", "unknown"] },
+        "dynamic_range": { "type": "string", "enum": ["low", "medium", "high", "unknown"] },
+        "light_change": { "type": "string", "enum": ["stable", "changing", "unknown"] },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "notes": {
+          "type": "array",
+          "maxItems": 6,
+          "items": { "type": "string", "minLength": 1, "maxLength": 180 }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "version": "evaluation-v1-2026-07-21",
+  "purpose": "固定检查画面依据、差异化取舍、诚实停下与机位自由度；不用于审美评分。",
+  "cases": [
+    { "id": "layered-mountains", "scene": "雾中三层山脊", "intent": "想保留山脊逐层退远", "expectedElements": ["前景山脊", "中景山脊", "远山"], "allowedOutcomes": ["analysis", "clarification"], "movement": ["lateral"] },
+    { "id": "sunset-dark-foreground", "scene": "夕阳、远山与暗色前景", "intent": "亮部和暗部的层次", "expectedElements": ["夕阳", "远山", "前景暗部"], "allowedOutcomes": ["analysis", "clarification"], "movement": ["height"] },
+    { "id": "bridge-reflection", "scene": "桥梁与水面倒影", "intent": "桥和倒影之间的呼应", "expectedElements": ["桥梁", "倒影"], "allowedOutcomes": ["analysis"], "movement": ["lateral", "height"] },
+    { "id": "single-tree-negative-space", "scene": "独树与大片天空", "intent": "树周围的安静", "expectedElements": ["独树", "天空"], "allowedOutcomes": ["analysis", "no_options"], "movement": [] },
+    { "id": "coast-leading-lines", "scene": "礁石海岸与浪线", "intent": "浪线把视线带向远处", "expectedElements": ["礁石", "浪线", "远处海面"], "allowedOutcomes": ["analysis"], "movement": ["forwardBackward", "lateral"] },
+    { "id": "forest-light-beam", "scene": "树林中的一束斜光", "intent": "光穿过树干的瞬间", "expectedElements": ["光束", "树干", "阴影"], "allowedOutcomes": ["analysis", "clarification"], "movement": ["lateral"] },
+    { "id": "city-rhythm", "scene": "远处建筑窗格重复", "intent": "重复中那一处变化", "expectedElements": ["窗格", "变化处"], "allowedOutcomes": ["analysis", "clarification"], "movement": [] },
+    { "id": "waterfall-motion", "scene": "瀑布与固定岩石", "intent": "水流和岩石的时间差", "expectedElements": ["水流", "岩石"], "allowedOutcomes": ["analysis"], "movement": ["forwardBackward"] },
+    { "id": "snow-low-contrast", "scene": "低反差雪地与浅色天空", "intent": "微弱的地平关系", "expectedElements": ["雪地", "天空", "地平线"], "allowedOutcomes": ["analysis", "no_options"], "movement": ["height"] },
+    { "id": "night-point-lights", "scene": "夜色中的零散灯点", "intent": "灯点之间的距离", "expectedElements": ["灯点", "暗部"], "allowedOutcomes": ["analysis", "clarification", "no_options"], "movement": [] },
+    { "id": "ambiguous-small-subject", "scene": "主体过小且无法辨认", "intent": "远处那个细节", "expectedElements": ["远处细节"], "allowedOutcomes": ["clarification", "no_options"], "movement": [] },
+    { "id": "flat-texture-no-anchor", "scene": "均匀纹理且没有明确关系", "intent": "说不清，只是停了下来", "expectedElements": ["重复纹理"], "allowedOutcomes": ["clarification", "no_options"], "movement": [] }
+  ]
+}

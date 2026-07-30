@@ -1,0 +1,402 @@
+{
+  "schema_version": "4.3",
+  "request_id": "scene_20260716_001",
+  "language": "zh-CN",
+  "outcome": "analysis",
+  "clarification": null,
+  "no_options": null,
+  "observations": {
+    "summary": "画面由岸边石头、湖面、远山和大面积云层组成，山体与云层之间有一处较亮区域。",
+    "attention_candidates": [
+      {
+        "label": "远山与云层之间的亮光",
+        "evidence": "它是画面中亮度最集中的区域，也与用户原话一致。",
+        "confidence": 0.93,
+        "region": [
+          0.56,
+          0.3,
+          0.18,
+          0.16
+        ]
+      },
+      {
+        "label": "湖面与远山的水平关系",
+        "evidence": "连续的水平层次形成了安静、稳定的空间结构。",
+        "confidence": 0.78
+      }
+    ],
+    "visual_relations": [
+      {
+        "elements": [
+          "远山与云层之间的亮光",
+          "远山山脊"
+        ],
+        "relation": "tonal_contrast",
+        "evidence": "亮光贴近山脊暗部，两者形成画面中最集中的明暗交界。",
+        "confidence": 0.9
+      },
+      {
+        "elements": [
+          "岸边石头",
+          "湖面",
+          "远山山脊"
+        ],
+        "relation": "depth_layering",
+        "evidence": "三个元素从画面下方向远处依次展开，构成可见的近、中、远层次。",
+        "confidence": 0.84
+      },
+      {
+        "elements": [
+          "远山与云层之间的亮光",
+          "画面两侧枝叶"
+        ],
+        "relation": "separation",
+        "evidence": "亮光周围仍有天空间隔，两侧枝叶尚未与亮部直接重叠。",
+        "confidence": 0.78
+      },
+      {
+        "elements": [
+          "远山山脊",
+          "湖面"
+        ],
+        "relation": "continuation",
+        "evidence": "山脊与湖面的横向边界沿画面宽度延续，形成多段近平行线。",
+        "confidence": 0.8
+      }
+    ],
+    "spatial_layers": [
+      "岸边石头",
+      "湖面",
+      "远山山脊",
+      "天空与云层",
+      "画面两侧枝叶"
+    ],
+    "light": {
+      "direction": "back",
+      "contrast": "high",
+      "highlight_risk": "high"
+    },
+    "uncertainties": [
+      "无法从手机参考图确定真实照度。",
+      "单张图片无法确认云层移动速度。"
+    ],
+    "factual_confidence": 0.88
+  },
+  "interpretations": [
+    {
+      "id": "sky_power",
+      "title": "云层压住远山与交界亮光",
+      "intention": "让天气与空间成为主要内容。",
+      "viewing_question": "当大面积云层保留得更多时，山云之间的亮光是更容易被注意，还是会被云层的重量压小？",
+      "grounding": {
+        "elements": [
+          "大面积云层",
+          "远山轮廓",
+          "山云之间的亮光"
+        ],
+        "relationship": "云层占据上方大面积空间，远山形成稳定的下边界，亮光位于两者交界。",
+        "intent_connection": "把用户注意到的亮光放回天气规模中，让它成为空间转折而不是孤立亮点。"
+      },
+      "visual_strategy": "scale_context",
+      "keep": [
+        "大面积云层",
+        "远山轮廓",
+        "亮光"
+      ],
+      "reduce": [
+        "岸边石头"
+      ],
+      "view_width": "wide",
+      "viewpoint": {
+        "height": "similar",
+        "lateral": "similar",
+        "distance": "farther",
+        "orientation": "landscape",
+        "description": "相对参考图保持相近高度与方向，如果身后空间安全且可用，可以略微退远，让天空和岸线同时进入画面。",
+        "viewfinder_check": "观察云层是否仍有足够面积，同时确认岸边没有重新变成最抢眼的部分。"
+      },
+      "field_steps": [
+        {
+          "action": "在身后空间安全时略微退远。",
+          "check": "观察天空面积增加后，远山是否仍能稳住画面。"
+        },
+        {
+          "action": "先用横向宽视角保留完整云层。",
+          "check": "检查岸边石头是否仍在争夺注意力。"
+        }
+      ],
+      "equivalent_focal_hint_mm": {
+        "min": 28,
+        "max": 40
+      },
+      "suggested_crop": [
+        0.08,
+        0.06,
+        0.84,
+        0.78
+      ],
+      "visual_effect": "画面会更开阔，远山成为尺度参照，天气变化更突出。",
+      "tradeoffs": "岸边现场感会减弱，画面更接近抽象的空间关系。",
+      "framing_plan": "围绕已观察元素调整画框边缘与空间比例",
+      "depth_of_field_intent": "让关键元素之间的层次关系保持可辨",
+      "motion_intent": "根据现场运动决定保留或凝固变化",
+      "highlight_shadow_intent": "保留高光与阴影中的主要关系，避免无依据地追求统一亮度",
+      "uncertainty": "现场距离、光线变化与最终画幅仍需由取景器确认"
+    },
+    {
+      "id": "quiet_light",
+      "title": "寻找安静的亮光",
+      "intention": "减少环境信息，让视线先停在山云之间的亮光。",
+      "viewing_question": "两侧树枝收得更近时，山云之间的亮光会成为停顿，还是更像被框住的标记？",
+      "grounding": {
+        "elements": [
+          "山云之间的亮光",
+          "远山山脊",
+          "两侧树枝"
+        ],
+        "relationship": "亮光贴近山脊，两侧枝叶可能进入亮部周围并分散注意。",
+        "intent_connection": "直接围绕用户停留的亮光，测试更克制的环境是否让它更清楚。"
+      },
+      "visual_strategy": "negative_space",
+      "keep": [
+        "亮光",
+        "远山",
+        "少量湖面"
+      ],
+      "reduce": [
+        "两侧树枝",
+        "岸边杂物",
+        "大部分天空"
+      ],
+      "view_width": "narrow",
+      "viewpoint": {
+        "height": "similar",
+        "lateral": "right",
+        "distance": "similar",
+        "orientation": "landscape",
+        "description": "保持大致距离和高度，从参考图位置附近偏右观察，让亮光与山脊之间的重叠关系更单纯。",
+        "viewfinder_check": "在取景器里检查亮光周围是否留有呼吸空间，并确认树枝没有压住亮部。"
+      },
+      "field_steps": [
+        {
+          "action": "保持相近高度并从参考位置附近偏右观察。",
+          "check": "检查树枝与亮部是否逐渐分开。"
+        },
+        {
+          "action": "用较窄视角收紧到亮光和山脊。",
+          "check": "确认亮部周围仍留有少量暗部作为呼吸空间。"
+        }
+      ],
+      "equivalent_focal_hint_mm": {
+        "min": 50,
+        "max": 70
+      },
+      "suggested_crop": [
+        0.35,
+        0.22,
+        0.48,
+        0.45
+      ],
+      "visual_effect": "画面会更安静、更集中，亮光与山体的关系更明确。",
+      "tradeoffs": "会失去天空的规模感和岸边的现场环境。",
+      "framing_plan": "围绕已观察元素调整画框边缘与空间比例",
+      "depth_of_field_intent": "让关键元素之间的层次关系保持可辨",
+      "motion_intent": "根据现场运动决定保留或凝固变化",
+      "highlight_shadow_intent": "保留高光与阴影中的主要关系，避免无依据地追求统一亮度",
+      "uncertainty": "现场距离、光线变化与最终画幅仍需由取景器确认"
+    },
+    {
+      "id": "layered_shore",
+      "title": "从岸边石头走向远山亮光",
+      "intention": "让岸边成为进入画面的起点，保留人在现场的距离感。",
+      "viewing_question": "岸边石头保留多少，才会把视线带向远山与亮光，而不是留在岸边？",
+      "grounding": {
+        "elements": [
+          "岸边石头",
+          "湖面",
+          "远山与亮光"
+        ],
+        "relationship": "石头、湖面和远山形成从近到远的连续层次，亮光停在最远一层。",
+        "intent_connection": "让用户注意到的亮光保留在真实抵达湖边的空间经验里。"
+      },
+      "visual_strategy": "depth_occlusion",
+      "keep": [
+        "岸边石头",
+        "湖面",
+        "远山",
+        "亮光"
+      ],
+      "reduce": [
+        "画面边缘零散枝叶"
+      ],
+      "view_width": "normal",
+      "viewpoint": {
+        "height": "lower",
+        "lateral": "left",
+        "distance": "similar",
+        "orientation": "landscape",
+        "description": "在安全可站立的位置保持大致距离，尝试略低且偏左的观察关系，让岸边石头更自然地引向湖面。",
+        "viewfinder_check": "检查前景石头是否形成连续入口；如果遮挡湖面过多，就回到更接近参考图的高度。"
+      },
+      "field_steps": [
+        {
+          "action": "在安全可站立处尝试略低且偏左的观察关系。",
+          "check": "检查前景石头是否形成连续入口。"
+        },
+        {
+          "action": "保持湖面与远山同时可见。",
+          "check": "观察前景增加后亮光是否仍能被找到。"
+        }
+      ],
+      "equivalent_focal_hint_mm": {
+        "min": 35,
+        "max": 50
+      },
+      "suggested_crop": [
+        0.12,
+        0.15,
+        0.76,
+        0.73
+      ],
+      "visual_effect": "前、中、后层次会更完整，观看者更容易感到自己位于岸边。",
+      "tradeoffs": "元素更多，亮光不再是唯一关注点。",
+      "framing_plan": "围绕已观察元素调整画框边缘与空间比例",
+      "depth_of_field_intent": "让关键元素之间的层次关系保持可辨",
+      "motion_intent": "根据现场运动决定保留或凝固变化",
+      "highlight_shadow_intent": "保留高光与阴影中的主要关系，避免无依据地追求统一亮度",
+      "uncertainty": "现场距离、光线变化与最终画幅仍需由取景器确认"
+    },
+    {
+      "id": "light_reflection",
+      "title": "让亮光落到湖面",
+      "intention": "把远处亮光与湖面反射看成一组呼应，而不是单独强调天空。",
+      "viewing_question": "当湖面反射在取景框中保留得更多时，视线会在山云之间的亮光与湖面反射之间往返，还是只停在天空？",
+      "grounding": {
+        "elements": [
+          "山云之间的亮光",
+          "湖面反射",
+          "远山轮廓"
+        ],
+        "relationship": "亮光与湖面较亮区域上下相对，中间由远山暗带分隔。",
+        "intent_connection": "把用户关注的亮点扩展为光线穿过山体与水面的呼应关系。"
+      },
+      "visual_strategy": "light_color",
+      "keep": [
+        "亮光",
+        "湖面反射",
+        "远山轮廓"
+      ],
+      "reduce": [
+        "大部分云层",
+        "岸边石头"
+      ],
+      "view_width": "normal",
+      "viewpoint": {
+        "height": "similar",
+        "lateral": "similar",
+        "distance": "similar",
+        "orientation": "landscape",
+        "description": "保持在参考图位置附近，用自然视角观察亮光与湖面反射是否能够形成上下呼应。",
+        "viewfinder_check": "检查亮光和反射之间是否仍有清楚联系，同时确认远山没有被压成无意义的暗带。"
+      },
+      "field_steps": [
+        {
+          "action": "先保持参考图附近的位置，把湖面反光与山脊放在同一横向关系里。",
+          "check": "观察两者是否产生呼应。"
+        },
+        {
+          "action": "小幅收紧取景并减少天空。",
+          "check": "检查湖面是否仍保留足够空间感。"
+        }
+      ],
+      "equivalent_focal_hint_mm": {
+        "min": 40,
+        "max": 55
+      },
+      "suggested_crop": [
+        0.2,
+        0.28,
+        0.65,
+        0.45
+      ],
+      "visual_effect": "亮光会从单一亮点变成贯穿山体与水面的关系，画面更含蓄。",
+      "tradeoffs": "云层在画面中的面积主导会减弱，天气不再是主要内容。",
+      "framing_plan": "围绕已观察元素调整画框边缘与空间比例",
+      "depth_of_field_intent": "让关键元素之间的层次关系保持可辨",
+      "motion_intent": "根据现场运动决定保留或凝固变化",
+      "highlight_shadow_intent": "保留高光与阴影中的主要关系，避免无依据地追求统一亮度",
+      "uncertainty": "现场距离、光线变化与最终画幅仍需由取景器确认"
+    },
+    {
+      "id": "abstract_bands",
+      "title": "山脊暗带隔开亮光与湖面亮带",
+      "intention": "暂时放下完整风景，把山脊、亮光和湖面压缩成几段明暗。",
+      "viewing_question": "山脊暗带变宽或变窄时，亮光与湖面亮带之间的分隔是否仍然清楚？",
+      "grounding": {
+        "elements": [
+          "山脊暗带",
+          "亮光",
+          "湖面亮带"
+        ],
+        "relationship": "山脊暗带横向隔开山云之间的亮光与湖面亮带，三段明暗由连续边界连接。",
+        "intent_connection": "把用户被亮光吸引的感受转译成更抽象的明暗结构。"
+      },
+      "visual_strategy": "rhythm_line",
+      "keep": [
+        "山脊线",
+        "亮光",
+        "一段湖面"
+      ],
+      "reduce": [
+        "岸边",
+        "大部分天空",
+        "两侧枝叶"
+      ],
+      "view_width": "detail",
+      "viewpoint": {
+        "height": "similar",
+        "lateral": "similar",
+        "distance": "similar",
+        "orientation": "square",
+        "description": "保持参考图附近的机位，用更窄且接近方形的取景关系观察画面中的明暗带。",
+        "viewfinder_check": "检查三段明暗是否各自清楚，同时确认亮光仍有山体或湖面作为尺度参照。"
+      },
+      "field_steps": [
+        {
+          "action": "保持当前位置，用更窄视角只截取山脊、亮光和一段湖面。",
+          "check": "观察它们是否形成清楚的明暗带。"
+        },
+        {
+          "action": "尝试方形关系并逐步减少两侧信息。",
+          "check": "检查亮光是否仍有环境参照而不是变成孤立亮点。"
+        }
+      ],
+      "equivalent_focal_hint_mm": {
+        "min": 70,
+        "max": 105
+      },
+      "suggested_crop": [
+        0.38,
+        0.25,
+        0.38,
+        0.4
+      ],
+      "visual_effect": "风景会更接近抽象的明暗结构，亮光与线条的关系更直接。",
+      "tradeoffs": "会失去岸边石头带来的抵达感和大面积云层呈现的天气规模。",
+      "framing_plan": "围绕已观察元素调整画框边缘与空间比例",
+      "depth_of_field_intent": "让关键元素之间的层次关系保持可辨",
+      "motion_intent": "根据现场运动决定保留或凝固变化",
+      "highlight_shadow_intent": "保留高光与阴影中的主要关系，避免无依据地追求统一亮度",
+      "uncertainty": "现场距离、光线变化与最终画幅仍需由取景器确认"
+    }
+  ],
+  "technical_observations": {
+    "motion": "unknown",
+    "dynamic_range": "high",
+    "light_change": "unknown",
+    "confidence": 0.76,
+    "notes": [
+      "建议真实相机试拍后检查高光警告或直方图。"
+    ]
+  }
+}

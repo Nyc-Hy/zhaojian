@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.1",
+  "run_id": "run_contract_fixture_001",
+  "mode": "mock",
+  "status": "completed",
+  "dataset": {
+    "id": "photography-skill-contract-fixture",
+    "version": "1.0.0",
+    "content_hash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "selection": {
+    "strategy": "explicit_asset_ids",
+    "source_asset_count": 60,
+    "selected_asset_count": 1,
+    "asset_ids": [
+      "landscape_training_001"
+    ],
+    "split_counts": {
+      "training": 1,
+      "regression": 0,
+      "holdout": 0
+    },
+    "content_hash": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+  },
+  "skills": [
+    {
+      "id": "observe-scene",
+      "version": "1.0.0",
+      "content_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "composition-relations",
+      "version": "1.0.0",
+      "content_hash": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  ],
+  "configuration": {
+    "provider": "mock",
+    "model": "trainer-fixture-v1",
+    "prompt_version": "1.0.0",
+    "schema_version": "1.0.0",
+    "independence_level": "mock_fixture",
+    "max_attempts": 2,
+    "timeout_ms": 2000,
+    "concurrency": 1,
+    "max_provider_calls": 0,
+    "selection_hash": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
+    "budget_limit": 0,
+    "currency": "CNY",
+    "pricing_version": "mock-unpriced",
+    "pricing_effective_at": "1970-01-01T00:00:00Z",
+    "input_per_million_cny": 0,
+    "output_per_million_cny": 0,
+    "max_cost_per_call": 0,
+    "base_url": null,
+    "mock_scenario_version": "1.0.0",
+    "config_hash": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  },
+  "budget": {
+    "currency": "CNY",
+    "limit": 0,
+    "reserved": 0,
+    "reserved_calls": 0,
+    "estimated_spend": 0,
+    "provider_calls": 0,
+    "uncertain_calls": 0,
+    "pricing_version": "mock-unpriced",
+    "pricing_effective_at": "1970-01-01T00:00:00Z",
+    "input_per_million_cny": 0,
+    "output_per_million_cny": 0,
+    "max_cost_per_call": 0
+  },
+  "call_records": [],
+  "counts": {
+    "total": 1,
+    "terminal": 1,
+    "completed": 1,
+    "quarantined": 0,
+    "failed": 0,
+    "cancelled": 0
+  },
+  "items": [
+    {
+      "asset_id": "landscape_training_001",
+      "dataset_split": "training",
+      "state": "completed",
+      "current_role": null,
+      "attempts": {
+        "observer": 1,
+        "direction_generator": 1,
+        "critic": 1,
+        "red_team": 1,
+        "curator": 1
+      },
+      "role_artifacts": [
+        {
+          "role": "observer",
+          "output_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "output_path": null,
+          "usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "calls": 0,
+            "estimated_cost": 0
+          },
+          "status": "completed"
+        },
+        {
+          "role": "direction_generator",
+          "output_hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+          "output_path": null,
+          "usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "calls": 0,
+            "estimated_cost": 0
+          },
+          "status": "completed"
+        },
+        {
+          "role": "critic",
+          "output_hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+          "output_path": null,
+          "usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "calls": 0,
+            "estimated_cost": 0
+          },
+          "status": "completed"
+        },
+        {
+          "role": "red_team",
+          "output_hash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+          "output_path": null,
+          "usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "calls": 0,
+            "estimated_cost": 0
+          },
+          "status": "completed"
+        },
+        {
+          "role": "curator",
+          "output_hash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+          "output_path": null,
+          "usage": {
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "calls": 0,
+            "estimated_cost": 0
+          },
+          "status": "completed"
+        }
+      ],
+      "findings": [],
+      "outcome": "completed",
+      "artifact": {
+        "path": "artifacts/landscape_training_001.json",
+        "content_hash": "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+      },
+      "last_error": null,
+      "updated_at": "2026-07-25T08:00:01Z"
+    }
+  ],
+  "started_at": "2026-07-25T08:00:00Z",
+  "updated_at": "2026-07-25T08:00:01Z",
+  "completed_at": "2026-07-25T08:00:01Z",
+  "stop_reason": "completed",
+  "content_hash": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+}

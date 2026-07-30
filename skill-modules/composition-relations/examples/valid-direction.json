@@ -1,0 +1,12 @@
+{
+  "id": "direction-depth-001",
+  "title": "让树枝只保留一层边缘",
+  "visual_strategy": "depth_occlusion",
+  "grounding": {
+    "elements": ["近处树枝", "远处山脊"],
+    "relationship": "近处树枝局部遮挡远处山脊，形成前后层次。",
+    "intent_connection": "回应用户对近景与远山关系的关注。"
+  },
+  "viewing_question": "树枝只遮住山脊一小段时，近景与远山的距离感会怎样变化？",
+  "tradeoffs": "减少树枝面积会让现场临近感变弱。"
+}

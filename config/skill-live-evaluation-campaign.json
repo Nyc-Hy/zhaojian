@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "campaign_id": "direction-contract202-qwen37plus-v3",
+  "dataset": {
+    "id": "photography-skill-v3",
+    "version": "3.0.0",
+    "content_hash": "sha256:887c338ab37c715e087822db8d73d7253485dbcc522f5126b573c57f31efb335",
+    "manifest_path": "datasets/photography-skill-v3/manifest.json",
+    "splits_path": "datasets/photography-skill-v3/splits.json"
+  },
+  "provider": {
+    "id": "qwen",
+    "model": "qwen3.7-plus-2026-05-26",
+    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1"
+  },
+  "contract": {
+    "prompt_version": "2.0.2",
+    "schema_version": "2.0.2"
+  },
+  "pricing": {
+    "version": "aliyun-cn-beijing-qwen3.7-plus-2026-05-26-observed-2026-07-27",
+    "effective_at": "2026-07-27T05:12:55Z",
+    "input_per_million_cny": 2,
+    "output_per_million_cny": 8,
+    "max_cost_per_call_cny": 0.545
+  },
+  "authorization": {
+    "required": true,
+    "status": "authorized",
+    "authorized_total_cny": 7.571352,
+    "authorization_id": "user_resume_authorization_20260729_004",
+    "authorized_at": "2026-07-29T09:32:26Z"
+  },
+  "stages": [
+    {
+      "stage_id": "smoke1",
+      "run_id": "run_live_contract202_smoke1_v3_20260729_001",
+      "purpose": "验证方向对象传输、确定性策略派生、空弱化集合与五角色闭环。",
+      "requires": [],
+      "selection": {
+        "mode": "explicit_asset_ids",
+        "asset_ids": [
+          "photo-v1-landscape-001"
+        ],
+        "selected_asset_count": 1
+      },
+      "max_attempts": 2,
+      "max_provider_calls": 6,
+      "budget_limit_cny": 0.65,
+      "max_controlled_repairs": 1
+    },
+    {
+      "stage_id": "smoke3",
+      "run_id": "run_live_contract202_smoke3_v3_20260729_001",
+      "purpose": "验证跨风光、人物和困难场景的结构化输出稳定性。",
+      "requires": [
+        "smoke1"
+      ],
+      "selection": {
+        "mode": "explicit_asset_ids",
+        "asset_ids": [
+          "photo-v1-landscape-001",
+          "photo-v1-portrait-001",
+          "photo-v1-difficult-003"
+        ],
+        "selected_asset_count": 3
+      },
+      "max_attempts": 2,
+      "max_provider_calls": 17,
+      "budget_limit_cny": 0.9,
+      "max_controlled_repairs": 2
+    },
+    {
+      "stage_id": "development12",
+      "run_id": "run_live_contract202_development12_v3_20260729_001",
+      "purpose": "在不触碰新保留集的情况下覆盖风光、城市、人物和困难场景。",
+      "requires": [
+        "smoke3"
+      ],
+      "selection": {
+        "mode": "explicit_asset_ids",
+        "asset_ids": [
+          "photo-v1-landscape-001",
+          "photo-v1-landscape-002",
+          "photo-v1-landscape-003",
+          "photo-v1-urban-001",
+          "photo-v1-urban-002",
+          "photo-v1-urban-003",
+          "photo-v1-portrait-001",
+          "photo-v1-portrait-002",
+          "photo-v1-portrait-003",
+          "photo-v1-difficult-001",
+          "photo-v1-difficult-002",
+          "photo-v1-difficult-003"
+        ],
+        "selected_asset_count": 12
+      },
+      "max_attempts": 2,
+      "max_provider_calls": 66,
+      "budget_limit_cny": 1.221352,
+      "max_controlled_repairs": 6
+    },
+    {
+      "stage_id": "full60",
+      "run_id": "run_live_contract202_full60_v3_20260729_001",
+      "purpose": "在前三阶段全部通过后，首次暴露并冻结新的 12 图保留集，完成 Beta 硬门禁。",
+      "requires": [
+        "development12"
+      ],
+      "selection": {
+        "mode": "full_dataset",
+        "asset_ids": [],
+        "selected_asset_count": 60
+      },
+      "max_attempts": 2,
+      "max_provider_calls": 315,
+      "budget_limit_cny": 4.8,
+      "max_controlled_repairs": 15
+    }
+  ]
+}
